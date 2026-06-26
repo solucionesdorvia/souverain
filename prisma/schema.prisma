@@ -1,12 +1,11 @@
 // Souverain — modelo de datos
-// Para producción cambiar provider a "postgresql".
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
