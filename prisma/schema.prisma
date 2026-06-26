@@ -1,0 +1,88 @@
+// Souverain — modelo de datos
+// Para producción cambiar provider a "postgresql".
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id           String      @id @default(cuid())
+  name         String
+  slug         String      @unique
+  description  String
+  tastingNotes String
+  origin       String
+  brand        String
+  categoryId   String
+  category     Category    @relation(fields: [categoryId], references: [id])
+  price        Int         // precio en centavos (ARS)
+  stock        Int         @default(0)
+  imageUrl     String
+  featured     Boolean     @default(false)
+  isExclusive  Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  items        OrderItem[]
+
+  @@index([categoryId])
+  @@index([featured])
+  @@index([isExclusive])
+}
+
+// Status: PENDING | PAID | CANCELLED | FULFILLED
+// CheckoutMethod: STRIPE | WHATSAPP
+// (SQLite no soporta enums; los modelamos como String con validación a nivel app.)
+
+model Order {
+  id              String      @id @default(cuid())
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  customerNotes   String?
+  total           Int
+  status          String      @default("PENDING")
+  checkoutMethod  String      @default("STRIPE")
+  stripeSessionId String?     @unique
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitPrice Int
+
+  @@index([orderId])
+}
+
+// Leads del programa On Premise (B2B)
+model Lead {
+  id          String   @id @default(cuid())
+  empresa     String
+  contactName String
+  email       String
+  phone       String
+  rubro       String
+  volumen     String?
+  ciudad      String?
+  mensaje     String?
+  status      String   @default("NEW")
+  createdAt   DateTime @default(now())
+}

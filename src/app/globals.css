@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    /* Sans-serif stack limpia. Evita Inter explícitamente. */
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  html {
+    background-color: #0a0a0a;
+    color: #f2efe9;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: #0a0a0a;
+    color: #f2efe9;
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background-color: #c9a24b;
+    color: #0a0a0a;
+  }
+
+  /* Scrollbar sutil */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+  }
+}
+
+@layer components {
+  .hairline {
+    border: 1px solid #262626;
+  }
+  .hairline-t {
+    border-top: 1px solid #262626;
+  }
+  .hairline-b {
+    border-bottom: 1px solid #262626;
+  }
+  .container-souv {
+    @apply mx-auto w-full max-w-[1400px] px-6 md:px-10;
+  }
+  .eyebrow {
+    @apply text-[11px] uppercase text-mute;
+    letter-spacing: 0.3em;
+  }
+  .eyebrow-gold {
+    @apply text-[11px] uppercase text-gold;
+    letter-spacing: 0.3em;
+  }
+
+  /* Jerarquía tipográfica editorial */
+  .display-1 {
+    @apply font-display font-medium leading-[1.02] tracking-[-0.01em];
+    font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+  }
+  .display-2 {
+    @apply font-display font-medium leading-[1.05] tracking-[-0.01em];
+    font-size: clamp(2.25rem, 4.8vw, 4rem);
+  }
+  .display-3 {
+    @apply font-display font-medium leading-[1.1];
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+  }
+  .body-lg {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+  .caption {
+    @apply text-xs text-mute leading-relaxed;
+  }
+  .label-souv {
+    @apply text-[10px] uppercase tracking-[0.3em] text-mute;
+  }
+
+  /* Numeración editorial estilo galería */
+  .gallery-number {
+    @apply font-display italic text-gold/70;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1;
+  }
+
+  /* Skeleton loader premium */
+  .skeleton {
+    @apply bg-surface;
+    background-image: linear-gradient(
+      90deg,
+      transparent 0,
+      rgba(255, 255, 255, 0.03) 40px,
+      transparent 80px
+    );
+    background-size: 400px 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-gold px-6 py-3 text-sm font-medium tracking-widest text-background uppercase transition-colors duration-500 ease-soft hover:bg-gold-light disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-hairline px-6 py-3 text-sm font-medium tracking-widest text-ink uppercase transition-colors duration-500 ease-soft hover:border-gold hover:text-gold;
+  }
+  .btn-link {
+    @apply inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-ink/80 hover:text-gold transition-colors duration-500 ease-soft;
+  }
+  .input-souv {
+    @apply w-full bg-transparent border-b border-hairline py-3 px-0 text-ink placeholder:text-mute focus:border-gold focus:outline-none transition-colors duration-500;
+  }
+}
