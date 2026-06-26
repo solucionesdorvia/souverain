@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProductForm } from "@/components/admin/ProductForm";

@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
@@ -9,6 +7,8 @@ import { HeroCinematic } from "@/components/HeroCinematic";
 import { ParallaxVideo } from "@/components/ParallaxVideo";
 import { GalleryPiece } from "@/components/GalleryPiece";
 import { VariantSwitcher } from "@/components/VariantSwitcher";
+
+export const dynamic = "force-dynamic";
 
 export const revalidate = 60;
 

@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +7,8 @@ import { Countdown } from "@/components/Countdown";
 import { Reveal } from "@/components/Reveal";
 import { formatPrice } from "@/lib/utils";
 import { VariantSwitcher } from "@/components/VariantSwitcher";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Ediciones Limitadas — Drops Exclusivos · Souverain",

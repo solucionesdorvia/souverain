@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +8,8 @@ import { GalleryPiece } from "@/components/GalleryPiece";
 import { Reveal } from "@/components/Reveal";
 import { formatPrice } from "@/lib/utils";
 import { getCheckoutMode } from "@/lib/checkout-mode";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const p = await prisma.product.findUnique({ where: { slug: params.slug } });

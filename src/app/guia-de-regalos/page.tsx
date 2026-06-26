@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +6,8 @@ import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
 import { GiftGuideClient } from "@/components/GiftGuideClient";
 import { VariantSwitcher } from "@/components/VariantSwitcher";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Guía de Regalos — Souverain",
