@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ShoppingBag, Menu, X, Search } from "lucide-react";
+import { Wine, ShoppingBag, Menu, X, Search } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/Logo";
@@ -58,6 +58,14 @@ export function Header() {
             >
               <Search size={18} strokeWidth={1.2} />
             </Link>
+            <a
+              href="#experiencias"
+              aria-label="Experiencias"
+              title="Experiencias & Catas"
+              className="hidden md:inline-flex p-2 text-gold/60 hover:text-gold transition-colors duration-500"
+            >
+              <Wine size={18} strokeWidth={1.2} />
+            </a>
             <button
               onClick={openCart}
               aria-label="Carrito"
