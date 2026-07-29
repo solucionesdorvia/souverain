@@ -5,7 +5,6 @@ import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
 import { HeroCinematic } from "@/components/HeroCinematic";
 import { ParallaxVideo } from "@/components/ParallaxVideo";
-import { VariantSwitcher } from "@/components/VariantSwitcher";
 
 export const metadata: Metadata = {
   title: "Distribuidora Souverain — La Rural · Chandon · Pernod Ricard · Catena Zapata",
@@ -751,7 +750,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <VariantSwitcher />
     </>
   );
 }
