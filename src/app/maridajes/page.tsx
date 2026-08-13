@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
-import { VariantSwitcher } from "@/components/VariantSwitcher";
 
 export const metadata: Metadata = {
   title: "Arte del Maridaje — Souverain",
@@ -280,7 +279,6 @@ export default function MaridajesPage() {
         </div>
       </section>
 
-      <VariantSwitcher />
     </div>
   );
 }

@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { CellarGrid } from "@/components/CellarGrid";
 import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
-import { VariantSwitcher } from "@/components/VariantSwitcher";
 
 export const dynamic = "force-dynamic";
 
@@ -208,7 +207,6 @@ export default async function LaCavaPage() {
         </div>
       </section>
 
-      <VariantSwitcher />
     </div>
   );
 }

@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
 import { GiftGuideClient } from "@/components/GiftGuideClient";
-import { VariantSwitcher } from "@/components/VariantSwitcher";
 
 export const dynamic = "force-dynamic";
 
@@ -217,7 +216,6 @@ export default async function GuiaRegalosPage() {
         </div>
       </section>
 
-      <VariantSwitcher />
     </div>
   );
 }

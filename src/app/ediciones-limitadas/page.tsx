@@ -6,7 +6,6 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { Countdown } from "@/components/Countdown";
 import { Reveal } from "@/components/Reveal";
 import { formatPrice } from "@/lib/utils";
-import { VariantSwitcher } from "@/components/VariantSwitcher";
 
 export const dynamic = "force-dynamic";
 
@@ -303,7 +302,6 @@ export default async function EdicionesLimitadasPage() {
         </div>
       </section>
 
-      <VariantSwitcher />
     </div>
   );
 }

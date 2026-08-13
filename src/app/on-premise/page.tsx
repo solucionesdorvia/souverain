@@ -9,7 +9,6 @@ import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
 import { OnPremiseForm } from "@/components/OnPremiseForm";
 import { SITE } from "@/lib/site";
-import { VariantSwitcher } from "@/components/VariantSwitcher";
 
 export const metadata: Metadata = {
   title: "On Premise — Programa para Establecimientos · Souverain",
@@ -326,7 +325,6 @@ export default function OnPremisePage() {
         </div>
       </section>
 
-      <VariantSwitcher />
     </div>
   );
 }
