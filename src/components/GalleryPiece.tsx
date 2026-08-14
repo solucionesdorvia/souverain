@@ -15,6 +15,7 @@ export type GalleryPieceData = {
   price: number;
   imageUrl: string;
   isExclusive?: boolean;
+  checkoutMode?: string;
 };
 
 /**
@@ -71,7 +72,11 @@ export function GalleryPiece({
             {piece.name}
           </h3>
           <div className="caption mb-3 line-clamp-1">{piece.origin}</div>
-          <div className="text-sm text-ink/90 tracking-wide">{formatPrice(piece.price)}</div>
+          {piece.checkoutMode === "CONSULTAR" ? (
+            <span className="text-[10px] uppercase tracking-[0.3em] text-gold/80">Consultar →</span>
+          ) : (
+            <div className="text-sm text-ink/90 tracking-wide">{formatPrice(piece.price)}</div>
+          )}
         </div>
       </Link>
     </motion.article>

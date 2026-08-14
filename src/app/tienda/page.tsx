@@ -127,6 +127,7 @@ export default async function TiendaPage({ searchParams }: { searchParams: SP })
                     price: p.price,
                     imageUrl: p.imageUrl,
                     isExclusive: p.isExclusive,
+                    checkoutMode: p.checkoutMode,
                   }}
                 />
               ))}

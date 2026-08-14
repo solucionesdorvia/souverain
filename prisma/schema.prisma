@@ -26,9 +26,11 @@ model Product {
   brand        String
   categoryId   String
   category     Category    @relation(fields: [categoryId], references: [id])
-  price        Int         // precio en centavos (ARS)
+  sku          String?
+  price        Int         @default(0) // precio en centavos (ARS); 0 = pendiente de cargar
   stock        Int         @default(0)
   imageUrl     String
+  checkoutMode String      @default("WEB") // "WEB" | "CONSULTAR"
   featured     Boolean     @default(false)
   isExclusive  Boolean     @default(false)
   createdAt    DateTime    @default(now())

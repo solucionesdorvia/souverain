@@ -2,311 +2,213 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// ─── Imágenes placeholder por categoría ───────────────────────────────────────
+const IMG = {
+  whisky:    "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop",
+  champagne: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=1200&auto=format&fit=crop",
+  cognac:    "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=1200&auto=format&fit=crop",
+  gin:       "https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1200&auto=format&fit=crop",
+  ron:       "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?q=80&w=1200&auto=format&fit=crop",
+  vodka:     "https://images.unsplash.com/photo-1598952966317-5d5af38b5ee6?q=80&w=1200&auto=format&fit=crop",
+  vino:      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop",
+};
+
 const categories = [
-  { name: "Whisky", slug: "whisky" },
+  { name: "Whisky",    slug: "whisky" },
   { name: "Champagne", slug: "champagne" },
-  { name: "Vinos", slug: "vinos" },
-  { name: "Cognac", slug: "cognac" },
-  { name: "Espirituosas", slug: "espirituosas" },
+  { name: "Cognac",    slug: "cognac" },
+  { name: "Gin",       slug: "gin" },
+  { name: "Ron",       slug: "ron" },
+  { name: "Vodka",     slug: "vodka" },
+  { name: "Vinos",     slug: "vinos" },
 ];
 
-// Precios en centavos ARS.
-const products: Array<{
+type ProductInput = {
   name: string;
-  slug: string;
-  description: string;
-  tastingNotes: string;
-  origin: string;
+  sku: string;
   brand: string;
+  origin: string;
   categorySlug: string;
-  price: number;
-  stock: number;
-  imageUrl: string;
+  checkoutMode: "WEB" | "CONSULTAR";
   featured?: boolean;
   isExclusive?: boolean;
-}> = [
-  {
-    name: "Macallan 18 Sherry Oak",
-    slug: "macallan-18-sherry-oak",
-    description:
-      "Single malt madurado dieciocho años en barricas de roble europeo curadas con jerez. Equilibrio entre fruta seca, especias y madera noble.",
-    tastingNotes:
-      "Naranja confitada, pasas, clavo de olor, chocolate amargo y un final largo a roble tostado.",
-    origin: "Speyside, Escocia",
-    brand: "The Macallan",
-    categorySlug: "whisky",
-    price: 78000000,
-    stock: 6,
-    imageUrl:
-      "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop",
-    featured: true,
-    isExclusive: true,
-  },
-  {
-    name: "Dom Pérignon Vintage 2013",
-    slug: "dom-perignon-vintage-2013",
-    description:
-      "Champagne de añada elaborado solo en cosechas excepcionales. Burbuja fina y persistente, estructura cremosa.",
-    tastingNotes:
-      "Brioche tostado, almendra, cítricos confitados, mineral salino, final largo y vertical.",
-    origin: "Épernay, Champagne, Francia",
-    brand: "Dom Pérignon",
-    categorySlug: "champagne",
-    price: 42000000,
-    stock: 12,
-    imageUrl:
-      "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=1200&auto=format&fit=crop",
-    featured: true,
-    isExclusive: true,
-  },
-  {
-    name: "Catena Zapata Adrianna River Stones Malbec 2019",
-    slug: "catena-zapata-river-stones-malbec",
-    description:
-      "Parcela única del viñedo Adrianna en Gualtallary. Uno de los Malbec más laureados de Argentina.",
-    tastingNotes:
-      "Violetas, frutos negros, hierbas frescas, grafito y una acidez tensa que sostiene un final mineral.",
-    origin: "Gualtallary, Mendoza, Argentina",
-    brand: "Catena Zapata",
-    categorySlug: "vinos",
-    price: 18500000,
-    stock: 18,
-    imageUrl:
-      "https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=1200&auto=format&fit=crop",
-    featured: true,
-  },
-  {
-    name: "Hennessy Paradis Impérial",
-    slug: "hennessy-paradis-imperial",
-    description:
-      "Assemblage de eaux-de-vie raras del corazón de Cognac. Encarna la esencia de la maison Hennessy.",
-    tastingNotes:
-      "Pétalos de jazmín, miel, naranja sanguina, especias dulces y madera muy fina.",
-    origin: "Cognac, Francia",
-    brand: "Hennessy",
-    categorySlug: "cognac",
-    price: 95000000,
-    stock: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=1200&auto=format&fit=crop",
-    featured: true,
-    isExclusive: true,
-  },
-  {
-    name: "Johnnie Walker Blue Label",
-    slug: "johnnie-walker-blue-label",
-    description:
-      "Blend escocés ultra premium. Selección de barricas raras con un perfil sedoso y profundo.",
-    tastingNotes:
-      "Miel, frutas rojas maduras, humo delicado, especias y un final amielado.",
-    origin: "Escocia",
-    brand: "Johnnie Walker",
-    categorySlug: "whisky",
-    price: 32000000,
-    stock: 14,
-    imageUrl:
-      "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=1200&auto=format&fit=crop",
-    featured: true,
-  },
-  {
-    name: "Krug Grande Cuvée 171ème Édition",
-    slug: "krug-grande-cuvee-171",
-    description:
-      "Multivintage de más de 140 vinos. La expresión más completa del estilo Krug.",
-    tastingNotes:
-      "Avellana tostada, mazapán, manzana cocida, jengibre y una sal mineral muy elegante.",
-    origin: "Reims, Champagne, Francia",
-    brand: "Krug",
-    categorySlug: "champagne",
-    price: 38000000,
-    stock: 8,
-    imageUrl:
-      "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=1200&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    name: "Glenfiddich 21 Gran Reserva",
-    slug: "glenfiddich-21-gran-reserva",
-    description:
-      "Single malt terminado en barricas de ron caribeño. Carácter cálido y especiado.",
-    tastingNotes:
-      "Banana asada, toffee, nuez moscada, jengibre confitado y roble tostado.",
-    origin: "Dufftown, Speyside, Escocia",
-    brand: "Glenfiddich",
-    categorySlug: "whisky",
-    price: 24500000,
-    stock: 10,
-    imageUrl:
-      "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    name: "Château Margaux 2015",
-    slug: "chateau-margaux-2015",
-    description:
-      "Primer Cru Classé del Médoc. Una añada histórica de Burdeos, equilibrio perfecto entre potencia y elegancia.",
-    tastingNotes:
-      "Grosella negra, violetas, cedro, tabaco rubio, taninos finísimos y final infinito.",
-    origin: "Margaux, Burdeos, Francia",
-    brand: "Château Margaux",
-    categorySlug: "vinos",
-    price: 165000000,
-    stock: 2,
-    imageUrl:
-      "https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?q=80&w=1200&auto=format&fit=crop",
-    isExclusive: true,
-    featured: true,
-  },
-  {
-    name: "Rémy Martin XO",
-    slug: "remy-martin-xo",
-    description:
-      "Assemblage de hasta 400 eaux-de-vie de Grande y Petite Champagne. Cognac generoso y opulento.",
-    tastingNotes:
-      "Ciruela madura, higo, canela, jazmín, avellana y madera dulce.",
-    origin: "Cognac, Francia",
-    brand: "Rémy Martin",
-    categorySlug: "cognac",
-    price: 22000000,
-    stock: 9,
-    imageUrl:
-      "https://images.unsplash.com/photo-1582106245687-cbb466a9f07f?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    name: "Grey Goose Magnum 1.75L",
-    slug: "grey-goose-magnum",
-    description:
-      "Vodka francés de trigo suave y agua de Gensac. Edición magnum para mesa.",
-    tastingNotes:
-      "Limpia, sedosa, leve dulzor a cereal, final fresco.",
-    origin: "Cognac, Francia",
-    brand: "Grey Goose",
-    categorySlug: "espirituosas",
-    price: 9800000,
-    stock: 20,
-    imageUrl:
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    name: "Tanqueray No. TEN",
-    slug: "tanqueray-no-ten",
-    description:
-      "Gin small-batch destilado con cítricos enteros frescos. Referente para el Martini.",
-    tastingNotes:
-      "Pomelo rosado, lima, enebro, manzanilla y un final brillante.",
-    origin: "Escocia",
-    brand: "Tanqueray",
-    categorySlug: "espirituosas",
-    price: 4200000,
-    stock: 30,
-    imageUrl:
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    name: "Veuve Clicquot La Grande Dame 2015",
-    slug: "veuve-clicquot-la-grande-dame-2015",
-    description:
-      "Cuvée de prestigio de la maison. Pinot Noir dominante de grandes crus.",
-    tastingNotes:
-      "Pera williams, pan tostado, almendra, flor blanca y un final saliniano.",
-    origin: "Reims, Champagne, Francia",
-    brand: "Veuve Clicquot",
-    categorySlug: "champagne",
-    price: 28500000,
-    stock: 7,
-    imageUrl:
-      "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    name: "Lagavulin 16",
-    slug: "lagavulin-16",
-    description:
-      "Single malt de Islay, ícono ahumado. Dieciséis años de maduración.",
-    tastingNotes:
-      "Turba, alquitrán, yodo marino, fruta seca y un final largo, ahumado y dulce.",
-    origin: "Islay, Escocia",
-    brand: "Lagavulin",
-    categorySlug: "whisky",
-    price: 16500000,
-    stock: 11,
-    imageUrl:
-      "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    name: "Don Julio 1942",
-    slug: "don-julio-1942",
-    description:
-      "Tequila añejo Reserva. Mínimo dos años y medio en barrica de roble americano.",
-    tastingNotes:
-      "Vainilla, caramelo, chocolate, agave cocido y un final cálido y sedoso.",
-    origin: "Jalisco, México",
-    brand: "Don Julio",
-    categorySlug: "espirituosas",
-    price: 19800000,
-    stock: 9,
-    imageUrl:
-      "https://images.unsplash.com/photo-1582106245687-cbb466a9f07f?q=80&w=1200&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    name: "Bodega Chacra Treinta y Dos Pinot Noir 2021",
-    slug: "chacra-treinta-y-dos-pinot-noir",
-    description:
-      "Pinot Noir biodinámico de viñas de 1932 en Río Negro. Una de las grandes joyas patagónicas.",
-    tastingNotes:
-      "Frutilla silvestre, hierbas frescas, té negro, mineral y una textura sedosa.",
-    origin: "Mainqué, Río Negro, Patagonia, Argentina",
-    brand: "Bodega Chacra",
-    categorySlug: "vinos",
-    price: 14500000,
-    stock: 12,
-    imageUrl:
-      "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=1200&auto=format&fit=crop",
-    featured: true,
-  },
+};
+
+// slug seguro desde nombre + SKU
+function toSlug(name: string, sku: string) {
+  return name
+    .toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "") + "-" + sku;
+}
+
+const products: ProductInput[] = [
+  // ─── WHISKY ────────────────────────────────────────────────────────────────
+  { name: "Chivas Regal 18 YO", sku: "52554", brand: "Chivas Regal", origin: "Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Chivas Regal Ultis", sku: "52556", brand: "Chivas Regal", origin: "Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Royal Salute 21 YO", sku: "78", brand: "Royal Salute", origin: "Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "The Glenlivet 18 YO", sku: "50689", brand: "The Glenlivet", origin: "Speyside, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Longmorn Distiller's Choice", sku: "14974", brand: "Longmorn", origin: "Speyside, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Scapa Skiren", sku: "14975", brand: "Scapa", origin: "Orkney, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Aberlour 12 YO (caja 3)", sku: "14973", brand: "Aberlour", origin: "Speyside, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Aberlour 12 YO", sku: "54783", brand: "Aberlour", origin: "Speyside, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Scapa Glansa", sku: "52219", brand: "Scapa", origin: "Orkney, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+
+  // ─── GIN ───────────────────────────────────────────────────────────────────
+  { name: "Monkey 47 Dry Gin", sku: "50246", brand: "Monkey 47", origin: "Selva Negra, Alemania", categorySlug: "gin", checkoutMode: "WEB" },
+  { name: "Gin Malfy Original", sku: "53208", brand: "Malfy", origin: "Torino, Italia", categorySlug: "gin", checkoutMode: "WEB" },
+  { name: "Gin Malfy Limone", sku: "53210", brand: "Malfy", origin: "Torino, Italia", categorySlug: "gin", checkoutMode: "WEB" },
+  { name: "Gin Malfy Pink", sku: "53209", brand: "Malfy", origin: "Torino, Italia", categorySlug: "gin", checkoutMode: "WEB" },
+
+  // ─── RON ───────────────────────────────────────────────────────────────────
+  { name: "Havana Club Selección de Maestros", sku: "11329", brand: "Havana Club", origin: "Cuba", categorySlug: "ron", checkoutMode: "WEB" },
+
+  // ─── VODKA ─────────────────────────────────────────────────────────────────
+  { name: "Absolut Elyx", sku: "12778", brand: "Absolut", origin: "Åhus, Suecia", categorySlug: "vodka", checkoutMode: "WEB" },
+
+  // ─── CHAMPAGNE — Perrier-Jouët & GH Mumm ──────────────────────────────────
+  { name: "Perrier-Jouët Grand Brut", sku: "51818", brand: "Perrier-Jouët", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Perrier-Jouët Blanc de Blancs", sku: "52143", brand: "Perrier-Jouët", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Perrier-Jouët Belle Époque", sku: "12765", brand: "Perrier-Jouët", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB", isExclusive: true },
+  { name: "GH Mumm Cordon Rouge", sku: "51816", brand: "GH Mumm", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "GH Mumm Grand Cordon Rosé", sku: "51517", brand: "GH Mumm", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "GH Mumm Olympe Demi Sec", sku: "52142", brand: "GH Mumm", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+
+  // ─── CHAMPAGNE — Dom Pérignon ──────────────────────────────────────────────
+  { name: "Dom Pérignon Blanc Vintage 2017", sku: "4787", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB", featured: true },
+  { name: "Dom Pérignon Blanc Vintage 2015", sku: "4633", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Dom Pérignon Blanc Vintage 2013", sku: "4438", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Dom Pérignon Luminous Label 2015", sku: "4655", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  // CONSULTAR
+  { name: "Dom Pérignon Luminous Label 2013", sku: "4466", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Dom Pérignon Blanc Vintage 2012 Magnum", sku: "4541", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Dom Pérignon Blanc Vintage 2010 Magnum", sku: "4309", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Dom Pérignon Blanc Vintage 2008 Magnum", sku: "4120", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Dom Pérignon Rosé Vintage 2009", sku: "4680", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Dom Pérignon Rosé Vintage 2008", sku: "4308", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Dom Pérignon Rosé Vintage 2006", sku: "4194", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Dom Pérignon P2 Vintage 2004", sku: "4467", brand: "Dom Pérignon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+
+  // ─── CHAMPAGNE — Moët & Chandon ────────────────────────────────────────────
+  { name: "Moët & Chandon Nectar Impérial", sku: "4623", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Brut Impérial", sku: "65", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Brut Imperial Golden", sku: "4121", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Ice Impérial", sku: "4639", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Grand Vintage Brut 2016", sku: "4749", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon MCIII", sku: "3615", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB", isExclusive: true },
+  { name: "Moët & Chandon Brut Rosé", sku: "4637", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Rosé Impérial", sku: "2721", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Grand Vintage Rosé 2015", sku: "4470", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Grand Vintage Rosé 2013", sku: "4305", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Moët & Chandon Rosé Imperial EOY21", sku: "4285", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  // CONSULTAR
+  { name: "Moët & Chandon Grand Vintage Brut 2015", sku: "4468", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Moët & Chandon Grand Vintage Brut 2013", sku: "4304", brand: "Moët & Chandon", origin: "Épernay, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+
+  // ─── COGNAC — Hennessy ─────────────────────────────────────────────────────
+  { name: "Hennessy V.S.", sku: "88", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB" },
+  { name: "Hennessy V.S. Luminous 2022", sku: "4414", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB" },
+  { name: "Hennessy V.S. Magnum", sku: "4396", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB" },
+  { name: "Hennessy V.S.O.P.", sku: "91", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB" },
+  { name: "Hennessy X.O.", sku: "4643", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB", isExclusive: true },
+  // CONSULTAR
+  { name: "Hennessy V.S. 20cl", sku: "3782", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "CONSULTAR" },
+
+  // ─── CHAMPAGNE — Veuve Clicquot ────────────────────────────────────────────
+  { name: "Veuve Clicquot Yellow Label Brut", sku: "4380", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Veuve Clicquot Yellow Label Brut Magnum", sku: "4642", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Veuve Clicquot Brut Rosé", sku: "4499", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Veuve Clicquot Rich On Ice", sku: "4616", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  { name: "Veuve Clicquot La Grande Dame Brut", sku: "4538", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB", isExclusive: true },
+  { name: "Veuve Clicquot La Grande Dame Rosé", sku: "4522", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB", isExclusive: true },
+  { name: "Veuve Clicquot Rich Rosé On Ice", sku: "4697", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
+  // CONSULTAR
+  { name: "Veuve Clicquot Extra Brut Extra Old", sku: "4306", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Veuve Clicquot Vintage 2012 Rosé", sku: "4021", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Veuve Clicquot Vintage Reserve 2015", sku: "4537", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+
+  // ─── CHAMPAGNE — Krug ──────────────────────────────────────────────────────
+  { name: "Krug Grande Cuvée 173ème Édition", sku: "4751", brand: "Krug", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+
+  // ─── VINOS — Cheval des Andes ──────────────────────────────────────────────
+  { name: "Cheval des Andes 2022", sku: "4683", brand: "Cheval des Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB", featured: true },
+  { name: "Cheval des Andes 2022 Magnum", sku: "4684", brand: "Cheval des Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Cheval des Andes 2021", sku: "4583", brand: "Cheval des Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  // CONSULTAR
+  { name: "Cheval des Andes 2020", sku: "4475", brand: "Cheval des Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Cheval des Andes 2019", sku: "4379", brand: "Cheval des Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Cheval des Andes 2018", sku: "4242", brand: "Cheval des Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+
+  // ─── VINOS — Terrazas de los Andes ─────────────────────────────────────────
+  { name: "Terrazas Grand Malbec 2022", sku: "4712", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Grand Cabernet Sauvignon 2022", sku: "4713", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Grand Chardonnay 2023", sku: "4711", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Grand Chardonnay 2021", sku: "4368", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Petit Manseng 2021", sku: "4648", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Origen Chardonnay 2025", sku: "4682", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Origen Altamira MB/CS 2022", sku: "4520", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Origen Los Chacayes MB 2022", sku: "4519", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Origen Las Compuertas MB 2022", sku: "4518", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  { name: "Terrazas Origen Caja Combinada", sku: "4531", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB" },
+  // CONSULTAR
+  { name: "Terrazas Grand Malbec 2021", sku: "4485", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Grand Malbec 2020", sku: "4412", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Grand Cabernet Sauvignon 2021", sku: "4484", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Grand Cabernet Sauvignon 2020", sku: "4413", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Grand Chardonnay 2022", sku: "4483", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Petit Manseng 2020", sku: "4488", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Origen Las Compuertas MB 2021", sku: "4350", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Origen Los Chacayes MB 2021", sku: "4393", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Terrazas Origen Paraje Altamira MB/CS 2021", sku: "4394", brand: "Terrazas de los Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "CONSULTAR", isExclusive: true },
+
+  // ─── VINOS — Cosechas Históricas ───────────────────────────────────────────
+  { name: "Arnaldo B 3 Litros", sku: "51913", brand: "Arnaldo B", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB", isExclusive: true },
+  { name: "Etchart Cosecha 92", sku: "51914", brand: "Etchart", origin: "Salta, Argentina", categorySlug: "vinos", checkoutMode: "WEB", isExclusive: true },
 ];
 
 async function main() {
-  console.log("→ Limpiando datos previos…");
+  console.log("Limpiando datos anteriores...");
   await prisma.orderItem.deleteMany();
   await prisma.order.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
 
-  console.log("→ Creando categorías…");
-  const categoryMap: Record<string, string> = {};
-  for (const c of categories) {
-    const created = await prisma.category.create({ data: c });
-    categoryMap[c.slug] = created.id;
+  console.log("Creando categorías...");
+  const catMap: Record<string, string> = {};
+  for (const cat of categories) {
+    const c = await prisma.category.create({ data: cat });
+    catMap[cat.slug] = c.id;
   }
 
-  console.log("→ Creando productos…");
+  console.log(`Creando ${products.length} productos...`);
   for (const p of products) {
+    const imageUrl = IMG[p.categorySlug as keyof typeof IMG] ?? IMG.whisky;
     await prisma.product.create({
       data: {
         name: p.name,
-        slug: p.slug,
-        description: p.description,
-        tastingNotes: p.tastingNotes,
+        slug: toSlug(p.name, p.sku),
+        sku: p.sku,
+        description: `${p.brand} — ${p.name}. Disponible para distribución exclusiva.`,
+        tastingNotes: "Consultar con nuestro equipo para notas de cata detalladas.",
         origin: p.origin,
         brand: p.brand,
-        categoryId: categoryMap[p.categorySlug],
-        price: p.price,
-        stock: p.stock,
-        imageUrl: p.imageUrl,
-        featured: !!p.featured,
-        isExclusive: !!p.isExclusive,
+        categoryId: catMap[p.categorySlug],
+        price: 0,
+        stock: p.checkoutMode === "CONSULTAR" ? 1 : 6,
+        imageUrl,
+        checkoutMode: p.checkoutMode,
+        featured: p.featured ?? false,
+        isExclusive: p.isExclusive ?? false,
       },
     });
   }
 
-  console.log(`✓ Seed completo: ${categories.length} categorías, ${products.length} productos.`);
+  console.log(`✓ ${products.length} productos creados.`);
+  console.log(`  WEB: ${products.filter(p => p.checkoutMode === "WEB").length}`);
+  console.log(`  CONSULTAR: ${products.filter(p => p.checkoutMode === "CONSULTAR").length}`);
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+  .catch((e) => { console.error(e); process.exit(1); })
+  .finally(() => prisma.$disconnect());

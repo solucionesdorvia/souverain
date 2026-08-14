@@ -7,7 +7,7 @@ import { AddToCart } from "@/components/AddToCart";
 import { GalleryPiece } from "@/components/GalleryPiece";
 import { Reveal } from "@/components/Reveal";
 import { formatPrice } from "@/lib/utils";
-import { getCheckoutMode } from "@/lib/checkout-mode";
+import { buildWhatsappUrl } from "@/lib/checkout-mode";
 
 export const dynamic = "force-dynamic";
 
@@ -34,8 +34,11 @@ export default async function ProductoPage({ params }: { params: { slug: string 
     orderBy: { createdAt: "desc" },
   });
 
-  const showWhatsapp = getCheckoutMode() === "whatsapp";
+  const isConsultar = product.checkoutMode === "CONSULTAR";
   const lowStock = product.stock > 0 && product.stock <= 6;
+  const consultarUrl = isConsultar
+    ? `https://wa.me/${process.env.WHATSAPP_NUMBER ?? "5491157581269"}?text=${encodeURIComponent(`Hola Souverain, quiero consultar disponibilidad y precio de: ${product.name}`)}`
+    : null;
 
   return (
     <div className="container-souv pt-12 pb-24">
@@ -82,14 +85,16 @@ export default async function ProductoPage({ params }: { params: { slug: string 
             </h1>
             <div className="caption mb-8">{product.origin}</div>
 
-            <div className="flex items-baseline gap-4 mb-10">
-              <span className="font-display text-3xl text-gold">{formatPrice(product.price)}</span>
-              {lowStock && (
-                <span className="label-souv text-bronze">
-                  Últimas {product.stock} botellas
-                </span>
-              )}
-            </div>
+            {!isConsultar && (
+              <div className="flex items-baseline gap-4 mb-10">
+                <span className="font-display text-3xl text-gold">{formatPrice(product.price)}</span>
+                {lowStock && (
+                  <span className="label-souv text-bronze">
+                    Últimas {product.stock} botellas
+                  </span>
+                )}
+              </div>
+            )}
 
             <div className="hairline-t hairline-b py-8 mb-10 space-y-7">
               <div>
@@ -116,14 +121,30 @@ export default async function ProductoPage({ params }: { params: { slug: string 
               </div>
             </div>
 
-            <AddToCart
-              productId={product.id}
-              slug={product.slug}
-              name={product.name}
-              imageUrl={product.imageUrl}
-              unitPrice={product.price}
-              showWhatsapp={showWhatsapp}
-            />
+            {isConsultar ? (
+              <div className="space-y-4">
+                <a
+                  href={consultarUrl!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full text-center block"
+                >
+                  Consultar disponibilidad →
+                </a>
+                <p className="text-[11px] uppercase tracking-[0.25em] text-mute text-center">
+                  Por WhatsApp · Sin compromiso
+                </p>
+              </div>
+            ) : (
+              <AddToCart
+                productId={product.id}
+                slug={product.slug}
+                name={product.name}
+                imageUrl={product.imageUrl}
+                unitPrice={product.price}
+                showWhatsapp={false}
+              />
+            )}
 
             <p className="caption mt-6">
               Entrega cuidada en CABA y GBA · Venta exclusiva a mayores de 18 años
@@ -161,6 +182,7 @@ export default async function ProductoPage({ params }: { params: { slug: string 
                   price: p.price,
                   imageUrl: p.imageUrl,
                   isExclusive: p.isExclusive,
+                  checkoutMode: p.checkoutMode,
                 }}
               />
             ))}
