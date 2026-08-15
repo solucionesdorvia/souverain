@@ -2,16 +2,108 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// ─── Imágenes placeholder por categoría ───────────────────────────────────────
-const IMG = {
-  whisky:    "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop",
-  champagne: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=1200&auto=format&fit=crop",
-  cognac:    "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=1200&auto=format&fit=crop",
-  gin:       "https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1200&auto=format&fit=crop",
-  ron:       "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?q=80&w=1200&auto=format&fit=crop",
-  vodka:     "https://images.unsplash.com/photo-1598952966317-5d5af38b5ee6?q=80&w=1200&auto=format&fit=crop",
-  vino:      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop",
+// ─── Fotos de producto ────────────────────────────────────────────────────────
+// Packshots descargados de las casas (Dom Pérignon, GH Mumm, Terrazas de los
+// Andes) y de distribuidores premium, recortados sobre el fondo oscuro de la
+// marca. Archivos en public/productos/.
+// Los vintages de una misma etiqueta comparten botella.
+const IMG_BY_SKU: Record<string, string> = {
+  "52554": "chivas-18",
+  "52556": "chivas-ultis",
+  "78": "royal-salute-21",
+  "50689": "glenlivet-18",
+  "14974": "longmorn-dc",
+  "14975": "scapa-skiren",
+  "14973": "aberlour-12",
+  "54783": "aberlour-12",
+  "52219": "scapa-glansa",
+  "50246": "monkey47",
+  "53208": "malfy-originale",
+  "53210": "malfy-limone",
+  "53209": "malfy-rosa",
+  "11329": "havana-maestros",
+  "12778": "absolut-elyx",
+  "51818": "pj-grand-brut",
+  "52143": "pj-blanc-blancs",
+  "12765": "pj-belle-epoque",
+  "51816": "mumm-cordon-rouge",
+  "51517": "mumm-rose",
+  "52142": "mumm-demi-sec",
+  "4787": "dp-vintage",
+  "4633": "dp-vintage",
+  "4438": "dp-vintage",
+  "4655": "dp-luminous",
+  "4466": "dp-luminous",
+  "4541": "dp-vintage",
+  "4309": "dp-vintage",
+  "4120": "dp-vintage",
+  "4680": "dp-rose",
+  "4308": "dp-rose",
+  "4194": "dp-rose",
+  "4467": "dp-p2",
+  "4623": "moet-nectar",
+  "65": "moet-brut",
+  "4121": "moet-golden",
+  "4639": "moet-ice",
+  "4749": "moet-gv",
+  "3615": "moet-brut",
+  "4637": "moet-rose",
+  "2721": "moet-rose",
+  "4470": "moet-gv-rose",
+  "4305": "moet-gv-rose",
+  "4285": "moet-rose",
+  "4468": "moet-gv",
+  "4304": "moet-gv",
+  "88": "hennessy-vs",
+  "4414": "hennessy-vs-lum",
+  "4396": "hennessy-vs",
+  "91": "hennessy-vsop",
+  "4643": "hennessy-xo",
+  "3782": "hennessy-vs",
+  "4380": "vc-yellow",
+  "4642": "vc-yellow",
+  "4499": "vc-rose",
+  "4616": "vc-rich",
+  "4538": "vc-gd",
+  "4522": "vc-gd-rose",
+  "4697": "vc-rich-rose",
+  "4306": "vc-extra-old",
+  "4021": "vc-vintage-rose",
+  "4537": "vc-gd",
+  "4751": "krug-gc",
+  "4683": "cheval",
+  "4684": "cheval",
+  "4583": "cheval",
+  "4475": "cheval",
+  "4379": "cheval",
+  "4242": "cheval",
+  "4712": "terr-grand-malbec",
+  "4713": "terr-grand-cab",
+  "4711": "terr-grand-chard",
+  "4368": "terr-grand-chard",
+  "4648": "terr-petit-manseng",
+  "4682": "terr-origen-chard",
+  "4520": "terr-altamira",
+  "4519": "terr-chacayes",
+  "4518": "terr-compuertas",
+  "4531": "terr-chacayes",
+  "4485": "terr-grand-malbec",
+  "4412": "terr-grand-malbec",
+  "4484": "terr-grand-cab",
+  "4413": "terr-grand-cab",
+  "4483": "terr-grand-chard",
+  "4488": "terr-petit-manseng",
+  "4350": "terr-compuertas",
+  "4393": "terr-chacayes",
+  "4394": "terr-altamira",
+  "51913": "arnaldo-b",
+  "51914": "arnaldo-b",
 };
+
+function imageFor(sku: string) {
+  const key = IMG_BY_SKU[sku];
+  return key ? `/productos/${key}.jpg` : "/productos/dp-vintage.jpg";
+}
 
 const categories = [
   { name: "Whisky",    slug: "whisky" },
@@ -183,7 +275,7 @@ async function main() {
 
   console.log(`Creando ${products.length} productos...`);
   for (const p of products) {
-    const imageUrl = IMG[p.categorySlug as keyof typeof IMG] ?? IMG.whisky;
+    const imageUrl = imageFor(p.sku);
     await prisma.product.create({
       data: {
         name: p.name,
