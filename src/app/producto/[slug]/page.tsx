@@ -154,8 +154,8 @@ export default async function ProductoPage({ params }: { params: { slug: string 
       </div>
 
       {related.length > 0 && (
-        <section className="mt-32 hairline-t pt-20">
-          <div className="flex items-end justify-between mb-14">
+        <section className="mt-16 md:mt-32 hairline-t pt-12 md:pt-20">
+          <div className="flex items-end justify-between mb-8 md:mb-14">
             <div>
               <div className="eyebrow-gold mb-3">De la misma colección</div>
               <h2 className="display-3">Otras piezas en {product.category.name}</h2>

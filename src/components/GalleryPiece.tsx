@@ -43,10 +43,14 @@ export function GalleryPiece({
       className={cn("group", className)}
     >
       <Link href={`/producto/${piece.slug}`} className="block">
-        <div className="flex items-baseline justify-between mb-4">
-          <span className="label-souv">Pieza N.º {num}</span>
+        {/* En 2 columnas de mobile no entran las dos etiquetas con el tracking
+            completo: se acorta a "N.º 01" y se achica el interletrado. */}
+        <div className="flex items-baseline justify-between gap-3 mb-4">
+          <span className="label-souv tracking-[0.18em] sm:tracking-[0.3em] whitespace-nowrap">
+            <span className="hidden sm:inline">Pieza </span>N.º {num}
+          </span>
           {piece.isExclusive && (
-            <span className="text-[9px] uppercase tracking-[0.3em] text-gold">
+            <span className="text-[9px] uppercase tracking-[0.18em] sm:tracking-[0.3em] text-gold whitespace-nowrap">
               Luxury Black
             </span>
           )}
