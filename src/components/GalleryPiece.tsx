@@ -55,12 +55,14 @@ export function GalleryPiece({
             </span>
           )}
         </div>
+        {/* anchos reales de la tarjeta: 2 columnas hasta xl y 3 desde xl, con el
+            contenedor topeado en 1400px (de ahí el valor fijo del último tramo) */}
         <div className="relative aspect-[3/4] bg-surface hairline overflow-hidden">
           <Image
             src={piece.imageUrl}
             alt={piece.name}
             fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            sizes="(max-width: 1023px) 45vw, (max-width: 1279px) 30vw, 320px"
             className="object-cover transition-transform duration-[1200ms] ease-soft group-hover:scale-[1.05]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-abyss/50 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-700" />

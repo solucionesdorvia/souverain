@@ -63,7 +63,7 @@ export default async function ProductoPage({ params }: { params: { slug: string 
               alt={product.name}
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 58vw"
+              sizes="(max-width: 1023px) 92vw, (max-width: 1399px) 52vw, 740px"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-abyss/40 via-transparent to-transparent" />

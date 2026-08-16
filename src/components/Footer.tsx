@@ -28,9 +28,11 @@ export function Footer() {
             <li><Link href="/contacto" className="text-ink/80 hover:text-gold transition-colors">Contacto</Link></li>
           </ul>
         </div>
-        <div>
+        {/* min-w-0 + break-words: el mail no tiene dónde cortar y desbordaba la
+            columna en el footer de 4 columnas (iPad retrato) */}
+        <div className="min-w-0">
           <div className="eyebrow mb-5">Contacto</div>
-          <ul className="space-y-3 text-sm text-ink/80">
+          <ul className="space-y-3 text-sm text-ink/80 break-words">
             <li>{SITE.address}</li>
             <li>{SITE.phone}</li>
             <li>{SITE.email}</li>
