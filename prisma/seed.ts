@@ -97,7 +97,7 @@ const IMG_BY_SKU: Record<string, string> = {
   "4393": "terr-chacayes",
   "4394": "terr-altamira",
   "51913": "arnaldo-b",
-  "51914": "arnaldo-b",
+  "51914": "etchart",
 };
 
 function imageFor(sku: string) {
