@@ -2,7 +2,8 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Search } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Category = { id: string; name: string; slug: string };
 
@@ -17,12 +18,18 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
   const max = sp.get("max") ?? "";
   const exclusive = sp.get("exclusive") === "1";
 
-  function update(patch: Record<string, string | null>) {
+  // En mobile el panel arranca plegado: si no, había que pasar casi dos
+  // pantallas de filtros antes de ver la primera botella.
+  const [open, setOpen] = useState(false);
+  const activos = [cat, brand, max, q, exclusive ? "1" : ""].filter(Boolean).length;
+
+  function update(patch: Record<string, string | null>, closeOnMobile = false) {
     const next = new URLSearchParams(sp.toString());
     for (const [k, v] of Object.entries(patch)) {
       if (v === null || v === "") next.delete(k);
       else next.set(k, v);
     }
+    if (closeOnMobile) setOpen(false);
     router.push(`/tienda${next.toString() ? `?${next.toString()}` : ""}`, { scroll: false });
   }
 
@@ -35,7 +42,23 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
   }, [q]);
 
   return (
-    <aside className="space-y-10">
+    <aside>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="lg:hidden w-full flex items-center justify-between hairline px-5 py-4"
+      >
+        <span className="text-[11px] uppercase tracking-[0.25em] text-ink">
+          Filtrar y ordenar{activos > 0 ? ` · ${activos}` : ""}
+        </span>
+        <ChevronDown
+          size={15}
+          className={cn("text-mute transition-transform duration-300", open && "rotate-180")}
+        />
+      </button>
+
+      <div className={cn("space-y-10", open ? "mt-10 lg:mt-0" : "hidden lg:block")}>
       <div>
         <div className="eyebrow mb-3">Búsqueda</div>
         <div className="relative">
@@ -54,7 +77,7 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
         <ul className="space-y-2">
           <li>
             <button
-              onClick={() => update({ categoria: null })}
+              onClick={() => update({ categoria: null }, true)}
               className={`text-sm transition-colors ${!cat ? "text-gold" : "text-ink/80 hover:text-gold"}`}
             >
               Todas
@@ -63,7 +86,7 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
           {categories.map((c) => (
             <li key={c.id}>
               <button
-                onClick={() => update({ categoria: c.slug })}
+                onClick={() => update({ categoria: c.slug }, true)}
                 className={`text-sm transition-colors ${cat === c.slug ? "text-gold" : "text-ink/80 hover:text-gold"}`}
               >
                 {c.name}
@@ -78,7 +101,7 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
         <ul className="space-y-2 max-h-56 overflow-y-auto pr-2">
           <li>
             <button
-              onClick={() => update({ marca: null })}
+              onClick={() => update({ marca: null }, true)}
               className={`text-sm transition-colors ${!brand ? "text-gold" : "text-ink/80 hover:text-gold"}`}
             >
               Todas
@@ -87,7 +110,7 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
           {brands.map((b) => (
             <li key={b}>
               <button
-                onClick={() => update({ marca: b })}
+                onClick={() => update({ marca: b }, true)}
                 className={`text-sm text-left transition-colors ${brand === b ? "text-gold" : "text-ink/80 hover:text-gold"}`}
               >
                 {b}
@@ -113,7 +136,7 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
         <div className="eyebrow mb-4">Orden</div>
         <select
           value={order}
-          onChange={(e) => update({ orden: e.target.value })}
+          onChange={(e) => update({ orden: e.target.value }, true)}
           className="input-souv appearance-none"
         >
           <option value="novedades" className="bg-surface">Novedades</option>
@@ -128,11 +151,12 @@ export function ShopFilters({ categories, brands }: { categories: Category[]; br
           <input
             type="checkbox"
             checked={exclusive}
-            onChange={(e) => update({ exclusive: e.target.checked ? "1" : null })}
+            onChange={(e) => update({ exclusive: e.target.checked ? "1" : null }, true)}
             className="accent-gold w-4 h-4"
           />
           <span className="text-sm text-ink/90">Solo Luxury Black</span>
         </label>
+      </div>
       </div>
     </aside>
   );
