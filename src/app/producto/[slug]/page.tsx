@@ -56,14 +56,17 @@ export default async function ProductoPage({ params }: { params: { slug: string 
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-        <Reveal className="lg:col-span-7">
-          <div className="relative aspect-[3/4] lg:aspect-[4/5] bg-surface hairline overflow-hidden">
+        {/* La foto va contenida a propósito: los vintages de una misma etiqueta
+            comparten packshot, y a tamaño grande se llegaba a leer un año que
+            no era el del producto. */}
+        <Reveal className="lg:col-span-5">
+          <div className="relative aspect-[3/4] bg-surface hairline overflow-hidden mx-auto max-w-[210px] sm:max-w-[260px] lg:max-w-[300px]">
             <Image
               src={product.imageUrl}
               alt={product.name}
               fill
               priority
-              sizes="(max-width: 1023px) 92vw, (max-width: 1399px) 52vw, 740px"
+              sizes="300px"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-abyss/40 via-transparent to-transparent" />
@@ -77,7 +80,7 @@ export default async function ProductoPage({ params }: { params: { slug: string 
           </div>
         </Reveal>
 
-        <Reveal delay={0.1} className="lg:col-span-5">
+        <Reveal delay={0.1} className="lg:col-span-7">
           <div className="lg:sticky lg:top-28">
             <div className="eyebrow-gold mb-4">{product.brand}</div>
             <h1 className="font-display text-4xl md:text-5xl xl:text-6xl leading-[1.02] tracking-tightest mb-5">
