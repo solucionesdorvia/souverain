@@ -8,6 +8,7 @@ import { GalleryPiece } from "@/components/GalleryPiece";
 import { Reveal } from "@/components/Reveal";
 import { formatPrice } from "@/lib/utils";
 import { buildWhatsappUrl } from "@/lib/checkout-mode";
+import { fotoDeOtraAnada } from "@/lib/anada-foto";
 
 export const dynamic = "force-dynamic";
 
@@ -78,6 +79,13 @@ export default async function ProductoPage({ params }: { params: { slug: string 
               </div>
             )}
           </div>
+          {/* De Cheval des Andes y de Terrazas no hay foto publicada por añada:
+              se usa la de otra cosecha y se aclara en lugar de disimularlo. */}
+          {fotoDeOtraAnada(product.name, product.imageUrl) && (
+            <p className="caption text-center mt-4 mx-auto max-w-[300px]">
+              Imagen ilustrativa · puede no corresponder a la añada
+            </p>
+          )}
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-7">
