@@ -74,14 +74,16 @@ export default async function ProductoPage({ params }: { params: { slug: string 
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-abyss/40 via-transparent to-transparent" />
-            {product.isExclusive && (
-              <div className="absolute top-6 left-6">
-                <span className="text-[10px] uppercase tracking-[0.3em] text-gold border border-gold/60 px-3 py-1.5 bg-abyss/60 backdrop-blur-sm">
-                  Luxury Black
-                </span>
-              </div>
-            )}
           </div>
+          {/* El sello va debajo y no encima: con la foto contenida, superpuesto
+              le tapaba el cuello a la botella. */}
+          {product.isExclusive && (
+            <div className="mt-4 flex justify-center">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-gold border border-gold/60 px-3 py-1.5">
+                Luxury Black
+              </span>
+            </div>
+          )}
           {/* De Cheval des Andes y de Terrazas no hay foto publicada por añada:
               se usa la de otra cosecha y se aclara en lugar de disimularlo. */}
           {fotoDeOtraAnada(product.name, product.imageUrl) && (
