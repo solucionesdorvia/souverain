@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { formatPrice } from "@/lib/utils";
+import { precioPublico } from "@/lib/utils";
 
 type Product = {
   id: string;
@@ -123,7 +123,9 @@ export function GiftGuideClient({ products }: { products: Product[] }) {
                     </div>
                     <div className="text-[10px] tracking-[0.25em] text-mute uppercase mb-1">{product.brand}</div>
                     <h3 className="font-display text-lg text-ink leading-tight mb-2">{product.name}</h3>
-                    <div className="text-sm text-gold tabular-nums">{formatPrice(product.price)}</div>
+                    <div className="text-sm text-gold tabular-nums">
+                      {precioPublico(product.price) ?? "Consultar"}
+                    </div>
                   </Link>
                 </motion.div>
               ))}

@@ -78,7 +78,9 @@ export function GalleryPiece({
             {piece.name}
           </h3>
           <div className="caption mb-3 line-clamp-1">{piece.origin}</div>
-          {piece.checkoutMode === "CONSULTAR" ? (
+          {/* price 0 = todavía no cargaron la lista. Mostrar "$ 0" se lee como un
+              error, así que hasta que haya precio la pieza va como consulta. */}
+          {piece.checkoutMode === "CONSULTAR" || piece.price === 0 ? (
             <span className="text-[10px] uppercase tracking-[0.3em] text-gold/80">Consultar →</span>
           ) : (
             <div className="text-sm text-ink/90 tracking-wide">{formatPrice(piece.price)}</div>

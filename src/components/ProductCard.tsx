@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { formatPrice } from "@/lib/utils";
+import { precioPublico } from "@/lib/utils";
 
 export type ProductCardData = {
   id: string;
@@ -57,7 +57,11 @@ export function ProductCard({ product, index = 0 }: { product: ProductCardData; 
             {product.name}
           </h3>
           <div className="text-xs text-mute mb-3 line-clamp-1">{product.origin}</div>
-          <div className="text-sm text-ink/90 tracking-wide">{formatPrice(product.price)}</div>
+          {precioPublico(product.price) ? (
+            <div className="text-sm text-ink/90 tracking-wide">{precioPublico(product.price)}</div>
+          ) : (
+            <span className="text-[10px] uppercase tracking-[0.3em] text-gold/80">Consultar &rarr;</span>
+          )}
         </div>
       </Link>
     </motion.div>

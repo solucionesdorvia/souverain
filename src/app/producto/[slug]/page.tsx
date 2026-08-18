@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { AddToCart } from "@/components/AddToCart";
 import { GalleryPiece } from "@/components/GalleryPiece";
 import { Reveal } from "@/components/Reveal";
-import { formatPrice } from "@/lib/utils";
+import { precioPublico } from "@/lib/utils";
 import { buildWhatsappUrl } from "@/lib/checkout-mode";
 import { fotoDeOtraAnada } from "@/lib/anada-foto";
 
@@ -35,7 +35,10 @@ export default async function ProductoPage({ params }: { params: { slug: string 
     orderBy: { createdAt: "desc" },
   });
 
-  const isConsultar = product.checkoutMode === "CONSULTAR";
+  // price 0 = la lista de precios todavía no está cargada. Mientras tanto la
+  // pieza se comporta como "Consultar": sin precio a la vista y sin carrito,
+  // porque un "$ 0" con botón de compra es peor que no mostrar precio.
+  const isConsultar = product.checkoutMode === "CONSULTAR" || product.price === 0;
   const lowStock = product.stock > 0 && product.stock <= 6;
   const consultarUrl = isConsultar
     ? `https://wa.me/${process.env.WHATSAPP_NUMBER ?? "5491157581269"}?text=${encodeURIComponent(`Hola Souverain, quiero consultar disponibilidad y precio de: ${product.name}`)}`
@@ -98,7 +101,7 @@ export default async function ProductoPage({ params }: { params: { slug: string 
 
             {!isConsultar && (
               <div className="flex items-baseline gap-4 mb-10">
-                <span className="font-display text-3xl text-gold">{formatPrice(product.price)}</span>
+                <span className="font-display text-3xl text-gold">{precioPublico(product.price)}</span>
                 {lowStock && (
                   <span className="label-souv text-bronze">
                     Últimas {product.stock} botellas

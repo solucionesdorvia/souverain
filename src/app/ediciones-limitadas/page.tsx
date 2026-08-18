@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Countdown } from "@/components/Countdown";
 import { Reveal } from "@/components/Reveal";
-import { formatPrice } from "@/lib/utils";
+import { precioPublico } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -235,7 +235,7 @@ export default async function EdicionesLimitadasPage() {
                       </Link>
                     )}
                     <div className="font-display text-2xl text-gold tabular-nums">
-                      {formatPrice(product.price)}
+                      {precioPublico(product.price) ?? "Consultar"}
                     </div>
                   </div>
                 </div>

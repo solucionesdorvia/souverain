@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { formatPrice } from "@/lib/utils";
+import { precioPublico } from "@/lib/utils";
 
 export type CellarPieceData = {
   id: string;
@@ -57,7 +57,9 @@ export function CellarPiece({ piece, index = 0 }: { piece: CellarPieceData; inde
             </p>
             <div className="flex items-center justify-between hairline-t pt-3">
               <span className="text-[10px] text-mute tracking-wide">{piece.origin}</span>
-              <span className="text-sm text-gold tabular-nums">{formatPrice(piece.price)}</span>
+              <span className="text-sm text-gold tabular-nums">
+                {precioPublico(piece.price) ?? "Consultar"}
+              </span>
             </div>
           </div>
         </div>
