@@ -139,7 +139,7 @@ const products: ProductInput[] = [
   // ─── WHISKY ────────────────────────────────────────────────────────────────
   { name: "Chivas Regal 18 YO", sku: "52554", brand: "Chivas Regal", origin: "Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
   { name: "Chivas Regal Ultis", sku: "52556", brand: "Chivas Regal", origin: "Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
-  { name: "Royal Salute 21 YO", sku: "78", brand: "Royal Salute", origin: "Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
+  { name: "Royal Salute 21 YO", sku: "78", brand: "Royal Salute", origin: "Escocia", categorySlug: "whisky", checkoutMode: "WEB", featured: true },
   { name: "The Glenlivet 18 YO", sku: "50689", brand: "The Glenlivet", origin: "Speyside, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
   { name: "Longmorn Distiller's Choice", sku: "14974", brand: "Longmorn", origin: "Speyside, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
   { name: "Scapa Skiren", sku: "14975", brand: "Scapa", origin: "Orkney, Escocia", categorySlug: "whisky", checkoutMode: "WEB" },
@@ -203,7 +203,7 @@ const products: ProductInput[] = [
   { name: "Hennessy V.S. Luminous 2022", sku: "4414", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB" },
   { name: "Hennessy V.S. Magnum", sku: "4396", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB" },
   { name: "Hennessy V.S.O.P.", sku: "91", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB" },
-  { name: "Hennessy X.O.", sku: "4643", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB", isExclusive: true },
+  { name: "Hennessy X.O.", sku: "4643", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "WEB", isExclusive: true, featured: true },
   // CONSULTAR
   { name: "Hennessy V.S. 20cl", sku: "3782", brand: "Hennessy", origin: "Cognac, Francia", categorySlug: "cognac", checkoutMode: "CONSULTAR" },
 
@@ -212,7 +212,7 @@ const products: ProductInput[] = [
   { name: "Veuve Clicquot Yellow Label Brut Magnum", sku: "4642", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
   { name: "Veuve Clicquot Brut Rosé", sku: "4499", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
   { name: "Veuve Clicquot Rich On Ice", sku: "4616", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
-  { name: "Veuve Clicquot La Grande Dame Brut", sku: "4538", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB", isExclusive: true },
+  { name: "Veuve Clicquot La Grande Dame Brut", sku: "4538", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB", isExclusive: true, featured: true },
   { name: "Veuve Clicquot La Grande Dame Rosé", sku: "4522", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB", isExclusive: true },
   { name: "Veuve Clicquot Rich Rosé On Ice", sku: "4697", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "WEB" },
   // CONSULTAR
@@ -221,7 +221,7 @@ const products: ProductInput[] = [
   { name: "Veuve Clicquot Vintage Reserve 2015", sku: "4537", brand: "Veuve Clicquot", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
 
   // ─── CHAMPAGNE — Krug ──────────────────────────────────────────────────────
-  { name: "Krug Grande Cuvée 173ème Édition", sku: "4751", brand: "Krug", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true },
+  { name: "Krug Grande Cuvée 173ème Édition", sku: "4751", brand: "Krug", origin: "Reims, Francia", categorySlug: "champagne", checkoutMode: "CONSULTAR", isExclusive: true, featured: true },
 
   // ─── VINOS — Cheval des Andes ──────────────────────────────────────────────
   { name: "Cheval des Andes 2022", sku: "4683", brand: "Cheval des Andes", origin: "Mendoza, Argentina", categorySlug: "vinos", checkoutMode: "WEB", featured: true },
