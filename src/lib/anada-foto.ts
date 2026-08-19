@@ -36,6 +36,7 @@ const ANADA_DE_LA_FOTO: Record<string, number> = {
   "vc-vintage-rose": 2008,   // la etiqueta dice 2008, no 2012
   "vc-vintage-2015": 2015,
   "pj-belle-epoque": 2018,
+  "etchart": 2022,
 };
 
 /** Devuelve la añada que se lee en la foto, o null si esa foto no muestra año. */
@@ -49,8 +50,24 @@ function anadaDeLaFoto(imageUrl: string): number | null {
  * Se usa para aclararlo al lado de la foto, únicamente en las que hace falta.
  */
 export function fotoDeOtraAnada(name: string, imageUrl: string): boolean {
-  const enNombre = name.match(/\b(19|20)\d{2}\b/);
-  if (!enNombre) return false;
+  const enNombre = anadaDelNombre(name);
+  if (enNombre === null) return false;
   const enFoto = anadaDeLaFoto(imageUrl);
-  return enFoto !== null && enFoto !== Number(enNombre[0]);
+  return enFoto !== null && enFoto !== enNombre;
+}
+
+/**
+ * Añada declarada en el nombre de la pieza.
+ *
+ * Además del año de cuatro cifras contempla la forma "Cosecha 92", que es como
+ * viene el Etchart del 92 en el catálogo. Sin esto quedaba fuera del control y
+ * mostraba una botella de 2022 sin ninguna aclaración.
+ */
+function anadaDelNombre(name: string): number | null {
+  const cuatro = name.match(/\b(19|20)\d{2}\b/);
+  if (cuatro) return Number(cuatro[0]);
+  const dos = name.match(/\bcosecha\s+(\d{2})\b/i);
+  if (!dos) return null;
+  const n = Number(dos[1]);
+  return n > 30 ? 1900 + n : 2000 + n;   // 92 -> 1992, 05 -> 2005
 }
