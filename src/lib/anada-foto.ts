@@ -28,10 +28,12 @@ const ANADA_DE_LA_FOTO: Record<string, number> = {
   "terr-grand-chard": 2024,
   "terr-petit-manseng": 2023,
   "terr-origen-chard": 2025,
+  "terr-altamira": 2021,
+  "terr-chacayes": 2021,
   "terr-compuertas": 2021,
   "vc-gd": 2018,
   "vc-gd-rose": 2015,
-  "vc-vintage-rose": 2012,
+  "vc-vintage-rose": 2008,   // la etiqueta dice 2008, no 2012
   "vc-vintage-2015": 2015,
   "pj-belle-epoque": 2018,
 };
