@@ -52,11 +52,32 @@ export function GiftGuideClient({ products }: { products: Product[] }) {
   const activeTier = TIERS.find(t => t.key === tier)!;
   const activeOcc = OCCASIONS.find(o => o.key === occasion)!;
 
-  const filtered = products
+  const candidatas = products
     .filter(p => !activeOcc.categorias.length || activeOcc.categorias.includes(p.category?.slug ?? ""))
     .filter(p => !hayPrecios || (p.price >= activeTier.min && p.price < activeTier.max))
-    .sort((a, b) => Number(b.isExclusive) - Number(a.isExclusive))
-    .slice(0, 6);
+    .sort((a, b) => Number(b.isExclusive) - Number(a.isExclusive));
+
+  // Ordenar sólo por exclusividad devolvía seis Dom Pérignon seguidos. Se toma
+  // de a una casa por vuelta, así las seis piezas son de marcas distintas
+  // mientras el catálogo lo permita.
+  const filtered: Product[] = [];
+  const porCasa = new Map<string, Product[]>();
+  for (const p of candidatas) {
+    const cola = porCasa.get(p.brand) ?? [];
+    cola.push(p);
+    porCasa.set(p.brand, cola);
+  }
+  while (filtered.length < 6) {
+    let entroAlguna = false;
+    for (const cola of porCasa.values()) {
+      const p = cola.shift();
+      if (!p) continue;
+      filtered.push(p);
+      entroAlguna = true;
+      if (filtered.length === 6) break;
+    }
+    if (!entroAlguna) break;
+  }
 
   return (
     <div>

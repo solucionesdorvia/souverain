@@ -137,7 +137,7 @@ export default async function EdicionesLimitadasPage() {
           </Reveal>
           <Reveal delay={0.26}>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#drops" className="btn-primary">Ver los drops activos</a>
+              <a href="#drops" className="btn-primary">Ver la selección</a>
               <Link href="/contacto" className="btn-ghost">Recibir notificaciones</Link>
             </div>
           </Reveal>
