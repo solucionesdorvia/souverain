@@ -69,7 +69,7 @@ export default async function OnPremisePage() {
       <section className="relative h-screen flex flex-col justify-between overflow-hidden -mt-20">
         <div className="absolute inset-0">
           <Image
-            src="/heros/seg-restaurantes.jpg"
+            src="/heros/onpremise.jpg"
             alt="Establecimiento On Premise Souverain"
             fill
             priority
