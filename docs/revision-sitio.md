@@ -1,5 +1,10 @@
 # Revisión completa del sitio en producción
 
+> **Estado al 27/8.** Resueltos y verificados en producción los siete puntos de
+> "Rompe", las cinco cifras sin respaldo y las 26 fotos prestadas. Quedan
+> abiertos el checkout, el formulario de contacto y la contraseña del admin,
+> que dependen de datos del cliente.
+
 Recorridas las 20 rutas, los 109 enlaces internos, las imágenes de cada página y
 el comportamiento en desktop y mobile.
 
