@@ -1,0 +1,219 @@
+<meta charset="utf-8">
+<title>Souverain · Carruseles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<!--
+THESIS: Un solo encuadre, idéntico en las treinta y una slides, y lo único que
+cambia es la botella. Refusa el carrusel de fotos sueltas de toda distribuidora:
+acá la repetición exacta es lo que convierte un surtido en una colección.
+OWN-WORLD: Negro #0A0A0A, oro #C9A24B, marfil #F2EFE9, filete #2A2A2A. Cormorant
+Garamond en cuerpos grandes. El escudo real de Souverain al pie, siempre en el
+mismo milímetro, es lo que firma la pieza. Sin cajas, sin sombras, un solo filete.
+STORY: El lector entiende que esto está curado y medido, cree que la casa elige
+una por una, y consulta.
+FIRST VIEWPORT: Slide 1 a 1080x1350. Las ocho botellas en grilla de cuatro por
+dos, todas a la misma altura sobre negro, sin más texto que el conteo arriba y
+el escudo abajo. Ninguna palabra compite con la imagen.
+FORM: La serie, candidato 7 de mi lista ordenada; seed key 19dc1185, re-roll 1.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+
+<style>
+  :root {
+    --negro: #0A0A0A;
+    --oro: #C9A24B;
+    --marfil: #F2EFE9;
+    --mudo: #8F8F8F;
+    --filete: #2A2A2A;
+    --display: "Cormorant Garamond", Garamond, serif;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #141414; font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--oro); color: var(--negro); }
+
+  /* El encuadre. Idéntico en todas las slides: ésa es la idea entera.
+     Las cuatro bandas tienen altura fija, así que ningún elemento se corre de
+     una slide a la otra al pasar. */
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    background: var(--negro);
+    color: var(--marfil);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 126px 1fr 300px 152px;
+    padding: 0 76px;
+  }
+  .slide::after {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(115% 70% at 50% 38%, rgba(255,255,255,.05), transparent 66%);
+  }
+
+  /* Banda 1 — rótulo */
+  .rotulo-banda {
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--filete);
+  }
+  .rotulo-banda .cual {
+    font-size: 21px; letter-spacing: .34em; text-transform: uppercase; color: var(--oro);
+  }
+  .rotulo-banda .cuenta {
+    font-size: 21px; letter-spacing: .26em; color: var(--mudo);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Banda 2 — imagen */
+  .imagen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 0; padding: 40px 0 20px;
+  }
+  .imagen > img { max-height: 100%; max-width: 100%; object-fit: contain; display: block; }
+
+  .grilla {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    align-items: end; width: 100%; height: 100%;
+  }
+  .grilla img { max-height: 100%; max-width: 100%; margin: 0 auto; object-fit: contain; display: block; }
+
+  .cifra {
+    font-family: var(--display); font-style: italic;
+    font-size: 300px; line-height: .78; color: var(--oro);
+  }
+  /* Portada de los carruseles sin foto: la serie de cifras hace de imagen. */
+  .cifras {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    place-items: center; width: 100%; height: 100%;
+    font-family: var(--display); font-style: italic;
+    font-size: 150px; line-height: 1; color: var(--oro);
+  }
+
+  /* Banda 3 — ficha. Cuerpos grandes a propósito: un carrusel se mira a un
+     tercio de este tamaño, así que todo lo que baje de 30px acá queda ilegible
+     en el teléfono. */
+  .ficha { padding-top: 4px; }
+  .ficha .nombre {
+    font-family: var(--display); font-weight: 400;
+    font-size: 86px; line-height: 1.0; letter-spacing: -.015em;
+  }
+  .ficha .origen {
+    margin-top: 20px; font-size: 25px; letter-spacing: .26em;
+    text-transform: uppercase; color: var(--oro);
+  }
+  .ficha .linea {
+    margin-top: 26px; font-family: var(--display);
+    font-size: 46px; line-height: 1.26; color: var(--mudo); max-width: 20ch;
+  }
+
+  /* Banda 4 — el escudo. Siempre en el mismo lugar: es lo que firma la pieza. */
+  .escudo {
+    display: flex; align-items: center; justify-content: center;
+    border-top: 1px solid var(--filete);
+  }
+  .escudo img { height: 100px; width: auto; }
+
+  .slide--portada { grid-template-rows: 126px 1fr 232px 152px; }
+  .slide--portada .ficha .nombre { font-size: 100px; }
+  .slide--portada .imagen { padding: 30px 0 14px; }
+  /* En el cierre la ficha se come la banda de imagen y se centra: es la única
+     slide donde manda el texto. El rótulo de arriba y el escudo de abajo
+     quedan intactos, así que el encuadre se sigue reconociendo. */
+  .slide--cierre { grid-template-rows: 126px 1fr 152px; }
+  .slide--cierre .ficha {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 0 40px;
+  }
+  .slide--cierre .ficha .nombre { font-size: 104px; }
+  .slide--cierre .ficha .linea { max-width: 24ch; }
+
+  /* Sólo para mirar en pantalla; no sale en la exportación. */
+  .tira { padding: 40px; display: flex; flex-direction: column; gap: 40px; align-items: center; }
+  .marca-tira { font: 13px/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: #666; align-self: flex-start; }
+</style>
+
+<div class="tira" id="tira"></div>
+
+<script src="datos.js"></script>
+<script>
+  const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  const bot = (k) => `normal/${k}.png`;
+  const CREST = "../public/logo-crest.png";
+  const dc = (n) => String(n).padStart(2, "0");
+
+  const banda = (cual, i, total) => `
+    <div class="rotulo-banda">
+      <span class="cual">${esc(cual)}</span>
+      <span class="cuenta">${dc(i)} — ${dc(total)}</span>
+    </div>`;
+
+  const pie = `<div class="escudo"><img src="${CREST}" alt="Souverain"></div>`;
+
+  function portada(c, total) {
+    const conFoto = c.entradas.filter((e) => e.foto);
+    const arte = conFoto.length
+      ? `<div class="grilla" style="grid-template-columns:repeat(${Math.min(conFoto.length, 4 + (conFoto.length === 5))},1fr)">${conFoto.map((e) => `<img src="${bot(e.foto)}" alt="">`).join("")}</div>`
+      : `<div class="cifras" style="grid-template-columns:repeat(${c.entradas.length % 3 === 0 ? 3 : 2},1fr)">${c.entradas.map((e) => `<span>${e.n}</span>`).join("")}</div>`;
+    return `<div class="slide slide--portada">
+      ${banda(c.etiqueta, 1, total)}
+      <div class="imagen">${arte}</div>
+      <div class="ficha">
+        <div class="nombre">${esc(c.portada.titulo)}</div>
+        <div class="origen">${esc(c.portada.bajada)}</div>
+      </div>
+      ${pie}
+    </div>`;
+  }
+
+  function pieza(c, e, i, total) {
+    const arte = e.foto
+      ? `<img src="${bot(e.foto)}" alt="${esc(e.nombre)}">`
+      : `<span class="cifra">${e.n}</span>`;
+    return `<div class="slide">
+      ${banda(c.etiqueta, i, total)}
+      <div class="imagen">${arte}</div>
+      <div class="ficha">
+        <div class="nombre">${esc(e.nombre)}</div>
+        <div class="origen">${esc(e.origen)}</div>
+        ${e.linea ? `<p class="linea">${esc(e.linea)}</p>` : ""}
+      </div>
+      ${pie}
+    </div>`;
+  }
+
+  function cierre(c, i, total) {
+    return `<div class="slide slide--cierre">
+      ${banda(c.etiqueta, i, total)}
+      <div class="ficha">
+        <div class="nombre">${esc(c.cierre.titulo)}</div>
+        <div class="origen">Consultas por mensaje directo</div>
+        <p class="linea">${esc(c.cierre.texto)}</p>
+      </div>
+      ${pie}
+    </div>`;
+  }
+
+  const soloSlide = new URLSearchParams(location.search).get("slide");
+  const tira = document.getElementById("tira");
+  let html = "";
+  for (const c of window.CARRUSELES) {
+    const total = c.entradas.length + 2;
+    html += `<div class="marca-tira">${c.id} · ${total} slides</div>`;
+    html += portada(c, total);
+    c.entradas.forEach((e, k) => { html += pieza(c, e, k + 2, total); });
+    html += cierre(c, total, total);
+  }
+  tira.innerHTML = html;
+
+  if (soloSlide !== null) {
+    const uno = tira.querySelectorAll(".slide")[Number(soloSlide)];
+    document.body.style.background = "#0A0A0A";
+    tira.style.cssText = "padding:0;gap:0";
+    tira.innerHTML = "";
+    if (uno) tira.appendChild(uno);
+  }
+</script>

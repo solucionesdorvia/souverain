@@ -11,3 +11,10 @@ prisma/dev.db
 prisma/dev.db-journal
 .vercel
 next-env.d.ts
+
+# Material derivado de los carruseles: se regenera desde public/productos y
+# desde instagram/carruseles.html, y pesa 75 MB.
+instagram/normal/
+instagram/png/
+instagram/contacto.jpg
+.impeccable/questions/

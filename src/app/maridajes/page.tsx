@@ -10,78 +10,82 @@ export const metadata: Metadata = {
     "Seis encuentros entre nuestras botellas y la gastronomía de nivel. Una guía editorial curada por el equipo Souverain.",
 };
 
+// Las seis piezas salen del catálogo real. La versión anterior destacaba
+// Macallan 18, Château Margaux, Krug 171, Hennessy Paradis y Lagavulin 16, que
+// eran del stock de ejemplo: sus fichas daban 404 desde que se cargó el
+// catálogo de Souverain. Las fotos de botella ahora son los packshots propios.
 const PAIRINGS = [
   {
     numeral: "I",
-    bottle: "The Macallan 18 Sherry Oak",
-    slug: "macallan-18-sherry-oak",
+    bottle: "The Glenlivet 18 Años",
+    slug: "the-glenlivet-18-yo-50689",
     category: "Whisky · Speyside, Escocia",
     food: "Trufa negra Périgord y charcutería curada",
     foodImg: "https://images.unsplash.com/photo-1452195100486-9cc805987862?q=80&w=1200&auto=format&fit=crop",
-    bottleImg: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=800&auto=format&fit=crop",
-    quote: "La trufa y el whisky escocés comparten un idioma que solo el invierno conoce.",
-    body: "El Macallan de 18 años, envejecido en jerez, despliega naranja confitada, clavo y chocolate amargo que amplifican el perfume terroso de la trufa negra. La grasa del hongo equilibra el tanino del roble europeo, alargando el final más de lo que cualquier maridaje convencional prometería.",
+    bottleImg: "/productos/glenlivet-18.jpg",
+    quote: "La trufa y el whisky escocés comparten un idioma que sólo el invierno conoce.",
+    body: "Dieciocho años entre roble americano y europeo le dan al Glenlivet una capa de fruta seca, naranja y especia dulce que amplifica el perfume terroso de la trufa negra. La grasa del hongo templa el tanino del roble y alarga el final más de lo que promete cualquier maridaje convencional.",
     tip: "Servirlo a 18°C en copa Glencairn, quince minutos antes del primer bocado.",
   },
   {
     numeral: "II",
-    bottle: "Dom Pérignon Vintage 2013",
-    slug: "dom-perignon-vintage-2013",
+    bottle: "Dom Pérignon Blanc Vintage 2013",
+    slug: "dom-perignon-blanc-vintage-2013-4438",
     category: "Champagne · Épernay, Francia",
     food: "Ostras finas de Bretaña con mignonette",
     foodImg: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop",
-    bottleImg: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=800&auto=format&fit=crop",
+    bottleImg: "/productos/dp-2013.jpg",
     quote: "Las burbujas limpian. Las ostras responden.",
-    body: "La acidez vertical del Dom Pérignon 2013 y su mousse fino funcionan como contrapunto exacto para la salinidad mineral de la ostra. El champagne abre el paladar, la ostra lo cierra. Es una de las pocas combinaciones donde cada elemento potencia al otro sin competir.",
+    body: "La acidez vertical del 2013 y su mousse fino funcionan como contrapunto exacto de la salinidad mineral de la ostra. El champagne abre el paladar, la ostra lo cierra. Es una de las pocas combinaciones donde cada elemento potencia al otro sin competir.",
     tip: "Temperatura ideal: 8°C. Copa tulipa para conservar la mousse durante el servicio.",
   },
   {
     numeral: "III",
-    bottle: "Château Margaux 2015",
-    slug: "chateau-margaux-2015",
-    category: "Vino Tinto · Médoc, Burdeos, Francia",
+    bottle: "Cheval des Andes 2022",
+    slug: "cheval-des-andes-2022-4683",
+    category: "Vino Tinto · Valle de Uco, Mendoza",
     food: "Entrecôte madurado en cámara 60 días",
     foodImg: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop",
-    bottleImg: "https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?q=80&w=800&auto=format&fit=crop",
-    quote: "El gran Médoc y la carne tienen una conversación que lleva siglos.",
-    body: "El Margaux 2015, con taninos de terciopelo y notas de cassis, cedro y violeta, necesita proteínas para mostrarse en toda su extensión. El entrecôte dry-aged con su grasa marmolada templa los polifenoles y revela las capas más profundas del vino: tabaco rubio, grafito y tierra de jardín.",
+    bottleImg: "/productos/cheval.jpg",
+    quote: "Château Cheval Blanc cruzó el Atlántico y encontró malbec esperándolo.",
+    body: "El corte de malbec y cabernet que nace del trabajo entre Cheval Blanc y Terrazas de los Andes tiene la estructura floral de un gran Médoc con la fruta de altura mendocina. Necesita proteína para mostrarse entero: el entrecôte madurado, con su grasa marmolada, ablanda los polifenoles y deja aparecer el tabaco y el grafito.",
     tip: "Decantar 90 minutos antes. Temperatura de servicio: 17°C.",
   },
   {
     numeral: "IV",
-    bottle: "Krug Grande Cuvée 171ème Édition",
-    slug: "krug-grande-cuvee-171",
+    bottle: "Krug Grande Cuvée 173ème Édition",
+    slug: "krug-grande-cuvee-173eme-edition-4751",
     category: "Champagne · Reims, Francia",
     food: "Caviar Beluga con blinis y crème fraîche",
     foodImg: "https://images.unsplash.com/photo-1578849278619-e73505e9610f?q=80&w=1200&auto=format&fit=crop",
-    bottleImg: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=800&auto=format&fit=crop",
+    bottleImg: "/productos/krug-gc.jpg",
     quote: "Dos absolutos en una misma copa. Ninguno cede territorio.",
-    body: "El Krug no es para acompañar: es para protagonizar. El caviar Beluga, con su untuosidad salina y sus notas de nuez, es uno de los pocos ingredientes capaces de pararse a la altura de este multivintage. La grasa del blinis actúa de puente, y la crème fraîche suaviza cualquier arista.",
+    body: "El Krug no es para acompañar: es para protagonizar. El caviar Beluga, con su untuosidad salina y sus notas de nuez, es uno de los pocos ingredientes capaces de pararse a la altura de un ensamblaje de más de cien vinos. La grasa del blinis hace de puente y la crème fraîche suaviza cualquier arista.",
     tip: "Cucharas de nácar o hueso. Nunca metal: oxida el caviar en segundos.",
   },
   {
     numeral: "V",
-    bottle: "Hennessy Paradis Impérial",
-    slug: "hennessy-paradis-imperial",
+    bottle: "Hennessy X.O.",
+    slug: "hennessy-x-o-4643",
     category: "Cognac · Cognac, Francia",
-    food: "Cigarro Cohiba Robustos",
+    food: "Chocolate amargo 70% y cigarro",
     foodImg: "https://images.unsplash.com/photo-1559762729-b54a0d7bd05f?q=80&w=1200&auto=format&fit=crop",
-    bottleImg: "https://images.unsplash.com/photo-1582106245687-cbb466a9f07f?q=80&w=800&auto=format&fit=crop",
+    bottleImg: "/productos/hennessy-xo.jpg",
     quote: "El cognac y el tabaco son primos que rara vez se reúnen. Cuando lo hacen, el tiempo se detiene.",
-    body: "El Paradis Impérial evoluciona en copa mientras el Cohiba se consume: los taninos del tabaco y las notas de madera especiada del cognac se retroalimentan, sumando longitud al final de ambos. No es un maridaje de comida — es un ritual de cierre.",
+    body: "El X.O., creado en 1870 y origen de toda la categoría, evoluciona en copa mientras el cigarro se consume: los taninos del tabaco y la fruta confitada del cognac se retroalimentan y suman longitud al final de ambos. El amargor del cacao levanta las notas de especia. No es un maridaje de comida, es un ritual de cierre.",
     tip: "Servir después de cenar, con luz baja. Copa sniffer calentada con las manos.",
   },
   {
     numeral: "VI",
-    bottle: "Lagavulin 16",
-    slug: "lagavulin-16",
-    category: "Whisky · Islay, Escocia",
+    bottle: "Scapa Glansa",
+    slug: "scapa-glansa-52219",
+    category: "Whisky · Orkney, Escocia",
     food: "Salmón ahumado escocés sobre blinis",
     foodImg: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1200&auto=format&fit=crop",
-    bottleImg: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=800&auto=format&fit=crop",
+    bottleImg: "/productos/scapa-glansa.jpg",
     quote: "Humo sobre humo: cuando el terroir es el mismo en la copa y en el plato.",
-    body: "La turba del Lagavulin no agrede cuando se encuentra con proteínas ahumadas. El salmón ahumado sobre blinis con crème fraîche crea un eco marino con el whisky que solo puede entenderse en la boca. El yodo del Islay y la grasa del salmón se funden en un final largo, dulce y marino.",
-    tip: "Agregar un splash de agua fría al whisky para abrir los aromas antes del maridaje.",
+    body: "El Glansa termina su crianza en barricas que guardaron whisky turbado, así que el humo llega sin la agresión de un Islay. El salmón ahumado sobre blinis con crème fraîche crea un eco marino que sólo se entiende en la boca: el yodo de las islas y la grasa del pescado se funden en un final largo, dulce y salino.",
+    tip: "Agregar un chorrito de agua fría al whisky para abrir los aromas antes del maridaje.",
   },
 ];
 
@@ -216,9 +220,6 @@ export default function MaridajesPage() {
                 <div className="mt-8 flex items-center gap-6">
                   <Link href={`/producto/${p.slug}`} className="btn-link text-sm">
                     Ver la botella →
-                  </Link>
-                  <Link href="/carrito" className="btn-ghost text-sm">
-                    Agregar al carrito
                   </Link>
                 </div>
               </Reveal>

@@ -13,21 +13,26 @@ type Product = {
   brand: string;
   price: number;
   imageUrl: string;
+  isExclusive: boolean;
+  category: { slug: string } | null;
 };
 
 type Occasion = {
   key: string;
   label: string;
   description: string;
-  emoji: string;
+  /** Categorías que se muestran en esta ocasión. Vacío = todo el catálogo. */
+  categorias: string[];
 };
 
+// Las solapas de ocasión cambiaban una frase y nada más: la grilla mostraba
+// siempre lo mismo. Ahora cada una acota el catálogo por categoría.
 const OCCASIONS: Occasion[] = [
-  { key: "cumpleanos", label: "Cumpleaños", description: "La botella que hace memorable cualquier celebración.", emoji: "—" },
-  { key: "aniversario", label: "Aniversario", description: "Un momento que merece una selección a la altura.", emoji: "—" },
-  { key: "corporativo", label: "Corporativo", description: "El regalo que habla por usted antes de abrir la boca.", emoji: "—" },
-  { key: "navidad", label: "Navidad", description: "La maison, la bodega, el momento exacto del año.", emoji: "—" },
-  { key: "sin-motivo", label: "Sin motivo", description: "Las mejores botellas no necesitan excusa.", emoji: "—" },
+  { key: "cumpleanos", label: "Cumpleaños", description: "La botella que hace memorable cualquier celebración.", categorias: ["champagne", "whisky"] },
+  { key: "aniversario", label: "Aniversario", description: "Un momento que merece una selección a la altura.", categorias: ["champagne", "vinos"] },
+  { key: "corporativo", label: "Corporativo", description: "El regalo que habla por usted antes de abrir la boca.", categorias: ["whisky", "cognac"] },
+  { key: "navidad", label: "Navidad", description: "La maison, la bodega, el momento exacto del año.", categorias: ["champagne", "cognac", "vinos"] },
+  { key: "sin-motivo", label: "Sin motivo", description: "Las mejores botellas no necesitan excusa.", categorias: [] },
 ];
 
 const TIERS = [
@@ -40,9 +45,17 @@ export function GiftGuideClient({ products }: { products: Product[] }) {
   const [occasion, setOccasion] = useState("cumpleanos");
   const [tier, setTier] = useState("esencial");
 
+  // Mientras no haya lista de precios cargada, todas las piezas valen 0 y el
+  // filtro por presupuesto dejaba dos de las tres solapas vacías. Se muestra
+  // sólo cuando hay precios de verdad.
+  const hayPrecios = products.some(p => p.price > 0);
   const activeTier = TIERS.find(t => t.key === tier)!;
+  const activeOcc = OCCASIONS.find(o => o.key === occasion)!;
+
   const filtered = products
-    .filter(p => p.price >= activeTier.min && p.price < activeTier.max)
+    .filter(p => !activeOcc.categorias.length || activeOcc.categorias.includes(p.category?.slug ?? ""))
+    .filter(p => !hayPrecios || (p.price >= activeTier.min && p.price < activeTier.max))
+    .sort((a, b) => Number(b.isExclusive) - Number(a.isExclusive))
     .slice(0, 6);
 
   return (
@@ -74,10 +87,11 @@ export function GiftGuideClient({ products }: { products: Product[] }) {
         >
           {/* Occasion description */}
           <p className="font-display italic text-2xl md:text-3xl text-ink/70 mb-12 max-w-xl">
-            {OCCASIONS.find(o => o.key === occasion)?.description}
+            {activeOcc.description}
           </p>
 
           {/* Price tier selector */}
+          {hayPrecios && (
           <div className="grid grid-cols-3 gap-3 md:gap-4 mb-12 max-w-2xl">
             {TIERS.map(t => (
               <button
@@ -94,6 +108,7 @@ export function GiftGuideClient({ products }: { products: Product[] }) {
               </button>
             ))}
           </div>
+          )}
 
           {/* Product grid */}
           {filtered.length > 0 ? (

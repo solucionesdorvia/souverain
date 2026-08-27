@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { StatusBadge } from "@/components/StatusBadge";
-import { Countdown } from "@/components/Countdown";
 import { Reveal } from "@/components/Reveal";
 import { precioPublico } from "@/lib/utils";
 
@@ -15,61 +13,72 @@ export const metadata: Metadata = {
     "Acceso anticipado a referencias que no existen en canales convencionales. Stock real. Sin reserva previa. Cuando se acaba, se acaba.",
 };
 
-type DropStatus = "DISPONIBLE" | "PREVENTA" | "AGOTADO";
-
-const DROPS_CONFIG: {
-  slug: string;
-  status: DropStatus;
-  countdown: string | null;
-  edition: string;
-  units: number;
-  story: string;
-}[] = [
+// Antes esta lista apuntaba al stock de ejemplo (Macallan 18, Château Margaux,
+// Hennessy Paradis), ninguno de los cuales quedó en el catálogo: la página
+// mostraba "0 drops activos" y todos sus enlaces daban 404. Ahora son piezas
+// reales, y se sacaron las unidades, los estados y la cuenta regresiva, que
+// eran inventados. Lo que se cuenta de cada botella es verificable.
+const DROPS_CONFIG: { slug: string; edition: string; story: string }[] = [
   {
-    slug: "dom-perignon-vintage-2013",
-    status: "PREVENTA",
-    countdown: "2026-12-31T23:59:59",
-    edition: "Vintage Prestige 2013",
-    units: 12,
-    story: "La añada 2013 de Dom Pérignon es la primera cosecha firmada en exclusiva por Vincent Chaperon. Un champagne de tensión y mineralidad excepcionales que solo está disponible mediante preventa en canales seleccionados.",
+    slug: "dom-perignon-p2-vintage-2004-4467",
+    edition: "Deuxième Plénitude",
+    story: "La segunda plenitud del 2004: dieciséis años sobre lías antes del degüelle. Dom Pérignon sostiene cada añada hasta que llega a una de sus tres ventanas de expresión, y la P2 es la del medio.",
   },
   {
-    slug: "macallan-18-sherry-oak",
-    status: "DISPONIBLE",
-    countdown: null,
-    edition: "Sherry Oak — Asignación Otoño 2026",
-    units: 6,
-    story: "La expresión más buscada de The Macallan. Dieciocho años en barricas de roble europeo curadas con jerez. Esta asignación es la última disponible en Argentina hasta la próxima importación, sin fecha confirmada.",
+    slug: "krug-grande-cuvee-173eme-edition-4751",
+    edition: "173ème Édition",
+    story: "Cada Grande Cuvée es un ensamblaje de más de cien vinos de una docena de añadas distintas, algunos con quince años de reserva. La edición 173 parte de la cosecha 2017.",
   },
   {
-    slug: "chateau-margaux-2015",
-    status: "DISPONIBLE",
-    countdown: null,
-    edition: "Premier Grand Cru Classé · Parker 99 pts",
-    units: 2,
-    story: "Una de las últimas 2 botellas de la añada 2015 disponibles en Argentina. Considerada una de las diez mejores añadas del siglo en Burdeos. Sin reservas.",
+    slug: "perrier-jouet-belle-epoque-12765",
+    edition: "Cuvée Belle Époque",
+    story: "La anémona japonesa que recorre la botella la dibujó Émile Gallé en 1902 y se esmalta a mano sobre el vidrio. La casa recuperó el diseño recién en 1964, para la primera Belle Époque.",
   },
   {
-    slug: "hennessy-paradis-imperial",
-    status: "AGOTADO",
-    countdown: null,
-    edition: "Cuvée Privée — Edición 2025",
-    units: 0,
-    story: "La edición más rara del Paradis Impérial, distribuida únicamente a cuentas On Premise y coleccionistas registrados. Esta asignación se cerró en menos de 24 horas.",
+    slug: "royal-salute-21-yo-78",
+    edition: "The Signature Blend",
+    story: "Creado en 1953 para la coronación de Isabel II y bautizado por las veintiún salvas de cañón del saludo real. Se presenta en un frasco de porcelana, no en vidrio.",
+  },
+  {
+    slug: "hennessy-x-o-4643",
+    edition: "The Original",
+    story: "Maurice Hennessy lo creó en 1870 para su círculo cercano y terminó dándole nombre a toda una categoría: antes del X.O. no existía la denominación.",
+  },
+  {
+    slug: "cheval-des-andes-2022-4683",
+    edition: "Château Cheval Blanc · Terrazas de los Andes",
+    story: "El corte de malbec y cabernet que nace del trabajo entre Cheval Blanc, de Saint-Émilion, y Terrazas de los Andes. Estructura de gran Médoc con la fruta de los viñedos de altura del Valle de Uco.",
   },
 ];
 
 export default async function EdicionesLimitadasPage() {
-  const slugs = DROPS_CONFIG.map(d => d.slug);
   const products = await prisma.product.findMany({
-    where: { slug: { in: slugs } },
+    where: { slug: { in: DROPS_CONFIG.map(d => d.slug) } },
     include: { category: true },
   });
 
-  const drops = DROPS_CONFIG.map(config => ({
+  const elegidas = DROPS_CONFIG.map(config => ({
     ...config,
     product: products.find(p => p.slug === config.slug),
   })).filter(d => d.product);
+
+  // Respaldo: si un slug deja de existir (recarga del catálogo, producto dado de
+  // baja) la página se completa con piezas Luxury Black de la base en vez de
+  // quedar vacía, que es exactamente lo que venía pasando.
+  const faltan = 6 - elegidas.length;
+  const relleno = faltan <= 0 ? [] : (await prisma.product.findMany({
+    where: { isExclusive: true, slug: { notIn: elegidas.map(d => d.slug) } },
+    include: { category: true },
+    orderBy: { createdAt: "desc" },
+    take: faltan,
+  })).map(product => ({
+    slug: product.slug,
+    edition: product.category.name,
+    story: product.description,
+    product,
+  }));
+
+  const drops = [...elegidas, ...relleno];
 
   return (
     <div className="bg-abyss min-h-screen pb-14">
@@ -99,7 +108,7 @@ export default async function EdicionesLimitadasPage() {
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="font-mono text-[9px] tracking-[0.4em] text-emerald-400 uppercase">
-                {drops.filter(d => d.status === "DISPONIBLE").length} drops activos
+                {drops.length} piezas en esta selección
               </span>
             </div>
           </Reveal>
@@ -139,9 +148,7 @@ export default async function EdicionesLimitadasPage() {
           <Reveal delay={0.3}>
             <div className="flex gap-10 hairline-t pt-8">
               {[
-                { n: `${drops.length}`, l: "drops esta temporada" },
-                { n: `${drops.filter(d => d.status === "DISPONIBLE").length}`, l: "disponibles ahora" },
-                { n: "24h", l: "duración promedio" },
+                { n: `${drops.length}`, l: "piezas en la selección" },
               ].map(s => (
                 <div key={s.l}>
                   <div className="font-display text-3xl text-gold mb-1">{s.n}</div>
@@ -173,7 +180,6 @@ export default async function EdicionesLimitadasPage() {
         {drops.map((drop, i) => {
           if (!drop.product) return null;
           const product = drop.product;
-          const isAgotado = drop.status === "AGOTADO";
 
           return (
             <section
@@ -186,7 +192,7 @@ export default async function EdicionesLimitadasPage() {
                   alt={product.name}
                   fill
                   sizes="100vw"
-                  className={`object-cover scale-105 ${isAgotado ? "grayscale opacity-10" : "opacity-10"}`}
+                  className="object-cover scale-105 opacity-10"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-abyss via-abyss/95 to-abyss/60" />
               </div>
@@ -197,7 +203,6 @@ export default async function EdicionesLimitadasPage() {
                     <span className="font-mono text-[9px] tracking-[0.5em] text-mute">
                       DROP {String(i + 1).padStart(2, "0")} / {String(drops.length).padStart(2, "0")}
                     </span>
-                    <StatusBadge status={drop.status} />
                   </div>
 
                   <div className="eyebrow-gold mb-3">
@@ -210,30 +215,10 @@ export default async function EdicionesLimitadasPage() {
 
                   <p className="text-ink/60 leading-relaxed mb-10 max-w-md">{drop.story}</p>
 
-                  {drop.countdown && drop.status === "PREVENTA" && (
-                    <div className="mb-10">
-                      <div className="eyebrow text-mute mb-5">Lanzamiento en</div>
-                      <Countdown target={drop.countdown} />
-                    </div>
-                  )}
-
-                  {!isAgotado && drop.units > 0 && (
-                    <div className="flex items-center gap-3 mb-8">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-[11px] tracking-[0.3em] text-emerald-400 uppercase">
-                        {drop.units} {drop.units === 1 ? "unidad disponible" : "unidades disponibles"}
-                      </span>
-                    </div>
-                  )}
-
                   <div className="flex items-center gap-6">
-                    {isAgotado ? (
-                      <button disabled className="btn-ghost opacity-30 cursor-not-allowed">Agotado</button>
-                    ) : (
-                      <Link href={`/producto/${product.slug}`} className="btn-primary">
-                        {drop.status === "PREVENTA" ? "Reservar lugar" : "Ver la pieza"}
-                      </Link>
-                    )}
+                    <Link href={`/producto/${product.slug}`} className="btn-primary">
+                      Ver la pieza
+                    </Link>
                     <div className="font-display text-2xl text-gold tabular-nums">
                       {precioPublico(product.price) ?? "Consultar"}
                     </div>
@@ -241,7 +226,7 @@ export default async function EdicionesLimitadasPage() {
                 </div>
 
                 <div className="hidden lg:flex lg:col-span-5 lg:col-start-8 justify-center">
-                  <div className={`relative w-56 xl:w-72 aspect-[2/3] hairline overflow-hidden ${isAgotado ? "grayscale opacity-30" : ""}`}>
+                  <div className="relative w-56 xl:w-72 aspect-[2/3] hairline overflow-hidden">
                     <Image
                       src={product.imageUrl}
                       alt={product.name}

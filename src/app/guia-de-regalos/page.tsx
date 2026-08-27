@@ -40,7 +40,10 @@ const REASONS = [
 export default async function GuiaRegalosPage() {
   const products = await prisma.product.findMany({
     orderBy: { price: "asc" },
-    select: { id: true, slug: true, name: true, brand: true, price: true, imageUrl: true },
+    select: {
+      id: true, slug: true, name: true, brand: true, price: true, imageUrl: true,
+      isExclusive: true, category: { select: { slug: true } },
+    },
   });
 
   return (

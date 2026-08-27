@@ -105,13 +105,20 @@ function imageFor(sku: string) {
   return key ? `/productos/${key}.jpg` : "/productos/dp-vintage.jpg";
 }
 
+// El filtro de la tienda las lista alfabéticamente desde la base, así que este
+// orden no afecta cómo se ven. Brandy va aparte de Cognac a propósito: el
+// Lepanto es brandy de Jerez y cognac es denominación de origen francesa.
 const categories = [
   { name: "Whisky",    slug: "whisky" },
   { name: "Champagne", slug: "champagne" },
   { name: "Cognac",    slug: "cognac" },
+  { name: "Brandy",    slug: "brandy" },
   { name: "Gin",       slug: "gin" },
-  { name: "Ron",       slug: "ron" },
   { name: "Vodka",     slug: "vodka" },
+  { name: "Ron",       slug: "ron" },
+  { name: "Tequila",   slug: "tequila" },
+  { name: "Pisco",     slug: "pisco" },
+  { name: "Licores",   slug: "licores" },
   { name: "Vinos",     slug: "vinos" },
 ];
 
