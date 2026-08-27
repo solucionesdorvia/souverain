@@ -21,7 +21,6 @@ const PAIRINGS = [
     slug: "the-glenlivet-18-yo-50689",
     category: "Whisky · Speyside, Escocia",
     food: "Trufa negra Périgord y charcutería curada",
-    foodImg: "https://images.unsplash.com/photo-1452195100486-9cc805987862?q=80&w=1200&auto=format&fit=crop",
     bottleImg: "/productos/glenlivet-18.jpg",
     quote: "La trufa y el whisky escocés comparten un idioma que sólo el invierno conoce.",
     body: "Dieciocho años entre roble americano y europeo le dan al Glenlivet una capa de fruta seca, naranja y especia dulce que amplifica el perfume terroso de la trufa negra. La grasa del hongo templa el tanino del roble y alarga el final más de lo que promete cualquier maridaje convencional.",
@@ -33,7 +32,6 @@ const PAIRINGS = [
     slug: "dom-perignon-blanc-vintage-2013-4438",
     category: "Champagne · Épernay, Francia",
     food: "Ostras finas de Bretaña con mignonette",
-    foodImg: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop",
     bottleImg: "/productos/dp-2013.jpg",
     quote: "Las burbujas limpian. Las ostras responden.",
     body: "La acidez vertical del 2013 y su mousse fino funcionan como contrapunto exacto de la salinidad mineral de la ostra. El champagne abre el paladar, la ostra lo cierra. Es una de las pocas combinaciones donde cada elemento potencia al otro sin competir.",
@@ -45,7 +43,6 @@ const PAIRINGS = [
     slug: "cheval-des-andes-2022-4683",
     category: "Vino Tinto · Valle de Uco, Mendoza",
     food: "Entrecôte madurado en cámara 60 días",
-    foodImg: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop",
     bottleImg: "/productos/cheval.jpg",
     quote: "Château Cheval Blanc cruzó el Atlántico y encontró malbec esperándolo.",
     body: "El corte de malbec y cabernet que nace del trabajo entre Cheval Blanc y Terrazas de los Andes tiene la estructura floral de un gran Médoc con la fruta de altura mendocina. Necesita proteína para mostrarse entero: el entrecôte madurado, con su grasa marmolada, ablanda los polifenoles y deja aparecer el tabaco y el grafito.",
@@ -57,7 +54,6 @@ const PAIRINGS = [
     slug: "krug-grande-cuvee-173eme-edition-4751",
     category: "Champagne · Reims, Francia",
     food: "Caviar Beluga con blinis y crème fraîche",
-    foodImg: "https://images.unsplash.com/photo-1578849278619-e73505e9610f?q=80&w=1200&auto=format&fit=crop",
     bottleImg: "/productos/krug-gc.jpg",
     quote: "Dos absolutos en una misma copa. Ninguno cede territorio.",
     body: "El Krug no es para acompañar: es para protagonizar. El caviar Beluga, con su untuosidad salina y sus notas de nuez, es uno de los pocos ingredientes capaces de pararse a la altura de un ensamblaje de más de cien vinos. La grasa del blinis hace de puente y la crème fraîche suaviza cualquier arista.",
@@ -69,7 +65,6 @@ const PAIRINGS = [
     slug: "hennessy-x-o-4643",
     category: "Cognac · Cognac, Francia",
     food: "Chocolate amargo 70% y cigarro",
-    foodImg: "https://images.unsplash.com/photo-1559762729-b54a0d7bd05f?q=80&w=1200&auto=format&fit=crop",
     bottleImg: "/productos/hennessy-xo.jpg",
     quote: "El cognac y el tabaco son primos que rara vez se reúnen. Cuando lo hacen, el tiempo se detiene.",
     body: "El X.O., creado en 1870 y origen de toda la categoría, evoluciona en copa mientras el cigarro se consume: los taninos del tabaco y la fruta confitada del cognac se retroalimentan y suman longitud al final de ambos. El amargor del cacao levanta las notas de especia. No es un maridaje de comida, es un ritual de cierre.",
@@ -81,7 +76,6 @@ const PAIRINGS = [
     slug: "scapa-glansa-52219",
     category: "Whisky · Orkney, Escocia",
     food: "Salmón ahumado escocés sobre blinis",
-    foodImg: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1200&auto=format&fit=crop",
     bottleImg: "/productos/scapa-glansa.jpg",
     quote: "Humo sobre humo: cuando el terroir es el mismo en la copa y en el plato.",
     body: "El Glansa termina su crianza en barricas que guardaron whisky turbado, así que el humo llega sin la agresión de un Islay. El salmón ahumado sobre blinis con crème fraîche crea un eco marino que sólo se entiende en la boca: el yodo de las islas y la grasa del pescado se funden en un final largo, dulce y salino.",
@@ -96,7 +90,7 @@ export default function MaridajesPage() {
       <section className="relative h-screen flex flex-col justify-between overflow-hidden -mt-20">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2400&auto=format&fit=crop"
+            src="/heros/maridajes.jpg"
             alt="Arte del Maridaje"
             fill
             priority
@@ -172,15 +166,14 @@ export default function MaridajesPage() {
             <div className={`container-souv py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center relative ${i % 2 !== 0 ? "lg:[&>*:first-child]:order-last" : ""}`}>
               {/* Imagen del alimento */}
               <Reveal className="lg:col-span-7" delay={0.04}>
-                <div className="relative aspect-[4/3] overflow-hidden hairline group">
+                <div className="relative aspect-[4/3] overflow-hidden hairline group bg-abyss">
                   <Image
-                    src={p.foodImg}
-                    alt={p.food}
+                    src={p.bottleImg}
+                    alt={p.bottle}
                     fill
                     sizes="(max-width: 1024px) 100vw, 58vw"
-                    className="object-cover transition-transform duration-[1200ms] ease-soft group-hover:scale-[1.03]"
+                    className="object-contain p-6 md:p-10 transition-transform duration-[1200ms] ease-soft group-hover:scale-[1.03]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-abyss/50 via-transparent to-transparent" />
                   <div className="absolute bottom-5 left-5">
                     <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/80 bg-abyss/70 backdrop-blur-sm px-3 py-1.5">
                       {p.food}
@@ -232,7 +225,7 @@ export default function MaridajesPage() {
       <section className="relative h-72 overflow-hidden hairline-t">
         <Parallax offset={60}>
           <Image
-            src="https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=2000&auto=format&fit=crop"
+            src="/heros/vert-champagne.jpg"
             alt="Champagne Souverain"
             fill
             sizes="100vw"
@@ -269,7 +262,7 @@ export default function MaridajesPage() {
           <Reveal delay={0.1}>
             <div className="relative aspect-[3/4] hairline overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=800&auto=format&fit=crop"
+                src="/heros/vert-whisky.jpg"
                 alt="Whisky Souverain"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"

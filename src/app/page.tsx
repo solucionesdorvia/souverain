@@ -47,7 +47,7 @@ const PAIRINGS = [
     dish: "Costillar de cordero a la llama",
     note: "La intensidad del Malbec de altura se equilibra con la grasa profunda del cordero. La mineralidad limpia el paladar entre cada bocado.",
     temp: "Servir a 17°C",
-    img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop",
+    img: "/productos/terr-grand-malbec.jpg",
   },
   {
     n: "II",
@@ -55,15 +55,15 @@ const PAIRINGS = [
     dish: "Tartar de salmón · Alcaparras · Blinis",
     note: "La acidez viva y la burbuja fina cortan la riqueza del salmón crudo. Un clásico de Épernay que nunca falla.",
     temp: "Servir a 8°C",
-    img: "https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=1200&auto=format&fit=crop",
+    img: "/productos/moet-brut.jpg",
   },
   {
     n: "III",
-    wine: "Chivas Regal 12 Años",
+    wine: "Chivas Regal 18 Años",
     dish: "Tabla de quesos curados · Almendras",
-    note: "La miel de acacia y vainilla del Chivas dialoga de manera natural con los quesos añejos. Neat o con una única piedra de hielo.",
+    note: "La miel de acacia y vainilla del Chivas 18 dialoga de manera natural con los quesos añejos. Neat o con una única piedra de hielo.",
     temp: "Neat o con hielo",
-    img: "https://images.unsplash.com/photo-1582819509237-d6e4e2d18b34?q=80&w=1200&auto=format&fit=crop",
+    img: "/productos/chivas-18.jpg",
   },
 ];
 
@@ -219,7 +219,7 @@ export default async function HomePage() {
               <Reveal key={p.n} delay={i * 0.12}>
                 <div className="relative overflow-hidden group">
                   <div className="relative h-48 overflow-hidden">
-                    <Image src={p.img} alt={p.dish} fill sizes="33vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                    <Image src={p.img} alt={p.wine} fill sizes="33vw" className="object-contain p-5 transition-transform duration-700 group-hover:scale-[1.04]" />
                     <div className="absolute inset-0 bg-abyss/60" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="font-display italic text-[5rem] text-gold/20 leading-none">{p.n}</span>

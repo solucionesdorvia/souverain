@@ -9,6 +9,7 @@ import { Reveal } from "@/components/Reveal";
 import { Parallax } from "@/components/Parallax";
 import { OnPremiseForm } from "@/components/OnPremiseForm";
 import { SITE } from "@/lib/site";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "On Premise — Programa para Establecimientos · Souverain",
@@ -33,10 +34,10 @@ const TIMELINE = [
 ];
 
 const SEGMENTS = [
-  { label: "Restaurantes", desc: "Gastronómicos, bistrós, omakase", img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop" },
-  { label: "Bares", desc: "Speakeasy, rooftop, coctelería de autor", img: "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?q=80&w=800&auto=format&fit=crop" },
-  { label: "Hoteles", desc: "Boutique, de lujo, lounge", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop" },
-  { label: "Clubes & Eventos", desc: "Privados, corporativos, catering", img: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=800&auto=format&fit=crop" },
+  { label: "Restaurantes", desc: "Gastronómicos, bistrós, omakase", img: "/heros/seg-restaurantes.jpg" },
+  { label: "Bares", desc: "Speakeasy, rooftop, coctelería de autor", img: "/heros/seg-bares.jpg" },
+  { label: "Hoteles", desc: "Boutique, de lujo, lounge", img: "/heros/seg-hoteles.jpg" },
+  { label: "Clubes & Eventos", desc: "Privados, corporativos, catering", img: "/heros/seg-eventos.jpg" },
 ];
 
 const PLAN_ROWS = [
@@ -51,14 +52,24 @@ const PLAN_ROWS = [
   { feature: "Acceso a drops exclusivos", essential: false, platinum: true },
 ];
 
-export default function OnPremisePage() {
+export const dynamic = "force-dynamic";
+
+export default async function OnPremisePage() {
+  // "60+ establecimientos activos", "27 años de experiencia" y "24h de
+  // respuesta garantizada" no tenían respaldo. Van datos del catálogo, que es
+  // lo que efectivamente se le ofrece a un salón.
+  const [piezas, casas, categorias] = await Promise.all([
+    prisma.product.count(),
+    prisma.product.findMany({ select: { brand: true }, distinct: ["brand"] }).then((r) => r.length),
+    prisma.category.count(),
+  ]);
   return (
     <div className="bg-surface min-h-screen pb-14">
       {/* HERO — fullscreen B2B impact */}
       <section className="relative h-screen flex flex-col justify-between overflow-hidden -mt-20">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2400&auto=format&fit=crop"
+            src="/heros/seg-restaurantes.jpg"
             alt="Establecimiento On Premise Souverain"
             fill
             priority
@@ -107,9 +118,9 @@ export default function OnPremisePage() {
           <Reveal delay={0.3}>
             <div className="flex gap-10 hairline-t pt-8">
               {[
-                { n: "60+", l: "Establecimientos activos" },
-                { n: "27", l: "Años de experiencia" },
-                { n: "24h", l: "Respuesta garantizada" },
+                { n: `${piezas}`, l: "Piezas en la colección" },
+                { n: `${casas}`, l: "Casas representadas" },
+                { n: `${categorias}`, l: "Categorías" },
               ].map(s => (
                 <div key={s.l}>
                   <div className="font-display text-3xl text-gold mb-1">{s.n}</div>
@@ -182,7 +193,7 @@ export default function OnPremisePage() {
       <section className="relative h-64 overflow-hidden hairline-t">
         <Parallax offset={50}>
           <Image
-            src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=2000&auto=format&fit=crop"
+            src="/heros/cava.jpg"
             alt="Cava On Premise"
             fill
             sizes="100vw"

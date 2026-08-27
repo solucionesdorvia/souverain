@@ -86,7 +86,7 @@ export default async function EdicionesLimitadasPage() {
       <section className="relative h-screen flex flex-col justify-between overflow-hidden -mt-20">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=2400&auto=format&fit=crop"
+            src="/heros/drops.jpg"
             alt="Ediciones Limitadas Souverain"
             fill
             priority

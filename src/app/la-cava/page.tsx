@@ -42,7 +42,7 @@ export default async function LaCavaPage() {
       <section className="relative h-screen flex flex-col justify-end overflow-hidden -mt-20">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=2400&auto=format&fit=crop"
+            src="/heros/cava.jpg"
             alt="La Cava Souverain"
             fill
             priority
@@ -101,12 +101,11 @@ export default async function LaCavaPage() {
       <section className="hairline-b bg-surface/40">
         <div className="container-souv py-10">
           <Reveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-hairline">
+            <div className="grid grid-cols-3 gap-8 divide-x-0 md:divide-x divide-hairline">
               {[
                 { n: `${products.length}`, l: "Piezas en el archivo" },
                 { n: `${products.filter(p => p.isExclusive).length}`, l: "Luxury Black" },
                 { n: `${products.filter(p => p.stock > 0).length}`, l: "Disponibles ahora" },
-                { n: "180+", l: "Referencias anuales" },
               ].map(s => (
                 <div key={s.l} className="md:pl-8 first:pl-0">
                   <div className="font-display text-4xl text-gold mb-1">{s.n}</div>
@@ -157,7 +156,7 @@ export default async function LaCavaPage() {
       <section className="relative h-64 md:h-80 overflow-hidden hairline-y">
         <Parallax offset={60}>
           <Image
-            src="https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?q=80&w=2000&auto=format&fit=crop"
+            src="/heros/vert-champagne.jpg"
             alt="Colección Souverain"
             fill
             sizes="100vw"

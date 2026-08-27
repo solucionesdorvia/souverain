@@ -3,18 +3,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { SITE } from "@/lib/site";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Nosotros",
   description: "Distribuidora Souverain — casa de bebidas premium en Buenos Aires.",
 };
 
-export default function NosotrosPage() {
+export const dynamic = "force-dynamic";
+
+export default async function NosotrosPage() {
+  // Las cifras que había acá (27 años en el rubro, 180+ referencias, 60+
+  // hoteles y restaurantes) estaban escritas en el código y no salían de
+  // ningún lado. Se reemplazan por lo que la base puede respaldar.
+  const [piezas, casas, categorias] = await Promise.all([
+    prisma.product.count(),
+    prisma.product.findMany({ select: { brand: true }, distinct: ["brand"] }).then((r) => r.length),
+    prisma.category.count(),
+  ]);
   return (
     <>
       <section className="relative h-[60vh] min-h-[420px] flex items-end overflow-hidden -mt-20">
         <Image
-          src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=2400&auto=format&fit=crop"
+          src="/heros/cava.jpg"
           alt="Cava Souverain"
           fill
           priority
@@ -24,7 +35,7 @@ export default function NosotrosPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
         <div className="relative container-souv pb-16">
           <Reveal>
-            <div className="eyebrow-gold mb-4">Desde 1998 · On Premise</div>
+            <div className="eyebrow-gold mb-4">Distribución · On Premise</div>
             <h1 className="display-1 max-w-4xl">
               La casa <span className="italic">Souverain.</span>
             </h1>
@@ -73,9 +84,9 @@ export default function NosotrosPage() {
         <div className="container-souv py-24 md:py-32">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             {[
-              { n: "27", l: "Años en el rubro" },
-              { n: "180+", l: "Referencias activas" },
-              { n: "60+", l: "Hoteles y restaurantes atendidos" },
+              { n: `${piezas}`, l: "Piezas en la colección" },
+              { n: `${casas}`, l: "Casas representadas" },
+              { n: `${categorias}`, l: "Categorías" },
             ].map((s, i) => (
               <Reveal key={s.l} delay={i * 0.1}>
                 <div className="font-display text-7xl md:text-8xl text-gold mb-3">{s.n}</div>

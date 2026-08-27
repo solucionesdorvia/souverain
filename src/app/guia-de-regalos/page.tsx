@@ -54,7 +54,7 @@ export default async function GuiaRegalosPage() {
         <div className="absolute inset-0 grid grid-cols-3 grid-rows-1">
           <div className="relative col-span-2">
             <Image
-              src="https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=1600&auto=format&fit=crop"
+              src="/heros/regalos.jpg"
               alt="Regalo de lujo"
               fill
               priority
@@ -64,7 +64,7 @@ export default async function GuiaRegalosPage() {
           </div>
           <div className="relative">
             <Image
-              src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=800&auto=format&fit=crop"
+              src="/heros/vert-whisky.jpg"
               alt="Whisky de regalo"
               fill
               sizes="34vw"
@@ -144,7 +144,7 @@ export default async function GuiaRegalosPage() {
       <section className="relative h-52 md:h-64 overflow-hidden hairline-t">
         <Parallax offset={50}>
           <Image
-            src="https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?q=80&w=2000&auto=format&fit=crop"
+            src="/heros/vert-champagne.jpg"
             alt="Vino de regalo"
             fill
             sizes="100vw"
@@ -177,7 +177,7 @@ export default async function GuiaRegalosPage() {
           <Reveal>
             <div className="relative aspect-video lg:aspect-square hairline overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=1200&auto=format&fit=crop"
+                src="/heros/regalos.jpg"
                 alt="Packaging Souverain"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
