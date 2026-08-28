@@ -57,6 +57,26 @@ la etiqueta, que para la web es mejor.
 ### Stella Crinita — 10 de 11
 **Sin foto: Radical Imagination Affinitá Trebbiano Toscana Blanco.**
 
-## Pendiente
+## Zuccardi — corrección del 28/8
 
-**Zuccardi**, que Gonzalo ya avisó que falta.
+**Lo que dije antes estaba mal.** Había mirado la biblioteca de medios del sitio
+público (`zuccardiwines.com/wp-json`), donde las botellas están a 687×955, y
+concluí que sus fotos eran chicas. El material real no está ahí: está en el
+**press kit**, en `zuccardiwines.com/es/prensa/descargas/`, alojado en un
+OneDrive de trade media que se abre sin login desde el navegador.
+
+La carpeta **Bottle Shots** tiene nueve subcarpetas: ALUVIONAL (4), FINCAS (8),
+FÓSIL-BOTÁNICO (3), POLÍGONOS (13), SPECIALTY WINES (8), SUPERCAL & GRAVASCAL
+(2), VITICULTOR (6), ZUCCARDI Q (7) y SERIE A (7).
+
+Dentro de cada finca hay **una foto por añada**. Por ejemplo Finca Piedra
+Infinita trae 2022, 2023, 2024, una carpeta "2019-2021 vintages" y — lo más
+útil — una versión **"sin añada"**. Son PNG de **3,71 MB**; la vista previa ya
+se sirve a 739×2560, muy por encima de los 1600×2133 con que se arma el
+catálogo.
+
+Las versiones "sin añada" resuelven de raíz el problema de la cosecha para toda
+la línea Zuccardi: no hay contradicción posible entre foto y título.
+
+El link necesita sesión de navegador, así que no se puede bajar por script. La
+carpeta tiene botón **Descargar**, que entrega un ZIP.
