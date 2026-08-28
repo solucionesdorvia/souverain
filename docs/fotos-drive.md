@@ -102,3 +102,48 @@ circulación.
 
 De las seis Fincas, además, había versión explícita "sin añada", que es la que
 se usó.
+
+
+## Procesamiento de las carpetas de Drive (28/8)
+
+Procesados **104 productos** de las dos carpetas de Drive al formato del
+catálogo. Con las 64 originales y las 36 de Zuccardi, el proyecto queda con
+**209 fotos**.
+
+| Bodega | Procesadas |
+|---|---|
+| Viña Cobos | 18 |
+| Cuchillo de Palo, Casa de Herrero y Ojo de Buen Cubero | 13 |
+| Matervini | 11 |
+| Stella Crinita y Radical Imagination | 10 |
+| Alma Mater | 8 |
+| AlmaNegra | 8 |
+| Mara de Uco | 7 |
+| Siesta en el Tahuán | 6 |
+| Ribera del Cuarzo | 6 |
+| Los Vascos | 6 |
+| On The Road | 5 |
+| CARO | 4 |
+| Cantieri Navali | 2 |
+
+### Qué hubo que resolver
+
+**Elegir la fuente.** Muchas bodegas mandan la misma botella dos veces, con y
+sin fondo. Tomar la primera por orden alfabético traía la equivocada: en
+Matervini elegía "Imposibles_inclinado" en vez de "Imposibles". Ahora se
+prefiere siempre la que trae alfa real y, entre iguales, la más grande. En
+Matervini, además, PG es plano general y PP primer plano de etiqueta: van las PG.
+
+**El reflejo del pie.** En los packshots sobre blanco queda un reflejo debajo de
+la botella que entra en la máscara y aparece como una franja clara. No se
+resuelve con umbral: probado con un valor fijo se comía el cuerpo de un rosado
+pálido, y con Otsu, peor. Lo que funcionó fue combinar tres criterios
+geométricos — quedarse en cada fila sólo con el tramo que contiene el eje de la
+botella, descartar las filas del pie que se ensanchan, y cortar desde abajo
+mientras la luminancia siga cerca del fondo — más un recorte del 1,5% inferior.
+
+### Sin procesar
+
+**Siesta Adobe Magnum**: la única foto disponible es la botella junto a un
+bloque de adobe, y el conjunto queda más ancho que alto. Rompe el encuadre de
+la serie, así que se dejó afuera hasta conseguir una del producto solo.
