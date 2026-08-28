@@ -80,3 +80,25 @@ la línea Zuccardi: no hay contradicción posible entre foto y título.
 
 El link necesita sesión de navegador, así que no se puede bajar por script. La
 carpeta tiene botón **Descargar**, que entrega un ZIP.
+
+
+## Zuccardi resuelto (28/8)
+
+Bajado el press kit: **159 archivos, 713 MB, todos en RGBA ya recortados**, con
+alto mediano de 4500 px (el más grande, 3542x11667). No hizo falta extraer
+fondo: sólo escalar y componer.
+
+**36 de los 39 productos que pidió Souverain quedaron con foto.** Sin material:
+Un Lugar en Los Andes Malbec 2022, Un Lugar en Los Andes Pinot Noir 2022 y
+Tinto de Familia 2014 — el pack trae otras líneas (Brazos, Los Olivos, Valles,
+Apelación, Mountain Vineyards, Zeta) que no figuran en la lista de Souverain.
+
+**Lo mejor: 35 de las 36 etiquetas no llevan la añada impresa al frente.**
+Verificado con OCR y confirmado a ojo en Piedra Infinita, Aluvional, Polígonos,
+Tito y Concreto. La única que la muestra es la Emma Bonarda, y dice 2023, que
+es justo la que se vende. Para toda la línea Zuccardi no puede haber
+contradicción entre la foto y el título, sin importar qué cosecha esté en
+circulación.
+
+De las seis Fincas, además, había versión explícita "sin añada", que es la que
+se usó.
