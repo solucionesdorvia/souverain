@@ -65,8 +65,12 @@ model OrderItem {
   id        String  @id @default(cuid())
   orderId   String
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
+  // El vínculo con el producto es opcional y el ítem guarda su propio nombre.
+  // Un pedido tiene que poder leerse aunque la pieza salga del catálogo: si el
+  // ítem dependiera del producto, recargar el catálogo borraría el historial.
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName String @default("")
   quantity  Int
   unitPrice Int
 

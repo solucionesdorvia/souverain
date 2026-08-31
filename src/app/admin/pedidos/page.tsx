@@ -42,7 +42,8 @@ export default async function AdminPedidosPage() {
               <ul className="hairline-t pt-4 space-y-2">
                 {o.items.map((it) => (
                   <li key={it.id} className="flex justify-between text-sm">
-                    <span className="text-ink/90">{it.quantity} × {it.product.name}</span>
+                    {/* El nombre se lee del ítem: la pieza puede haber salido del catálogo. */}
+                    <span className="text-ink/90">{it.quantity} × {it.productName || it.product?.name || "Pieza dada de baja"}</span>
                     <span className="text-mute tabular-nums">{formatPrice(it.unitPrice * it.quantity)}</span>
                   </li>
                 ))}

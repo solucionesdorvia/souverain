@@ -52,6 +52,7 @@ export async function POST(req: Request) {
       items: {
         create: lines.map((l) => ({
           productId: l.product.id,
+          productName: l.product.name,
           quantity: l.quantity,
           unitPrice: l.product.price,
         })),
