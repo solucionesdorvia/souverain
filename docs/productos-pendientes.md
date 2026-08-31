@@ -447,6 +447,52 @@ Espelette, lychee.
 - Cuatro piezas dicen **PRÓXIMAMENTE** y no se cargan todavía: On The Road Malbec,
   AlmaNegra Leggero, AlmaNegra Heroico y Mara Pie Franco Barbera.
 
+
+## Tanda 8 — Luigi Bosca · 26 productos · con código
+
+### Luigi Bosca I Finest — 750 ml, madera x 4 bot.
+| Código | Producto |
+|---|---|
+| 121530644121 | Luigi Bosca Paraíso 2021 |
+| 121530644122 | Luigi Bosca Paraíso 2022 |
+| 12153024422 | León Cabernet Sauvignon 2022 |
+| 12153024423 | León Cabernet Sauvignon 2023 |
+| 12151014423 | Filos Chardonnay 2023 |
+| 12151014424 | Filos Chardonnay 2024 |
+| 121330644121 | Finca Los Nobles Malbec DOC 2021 |
+| 121330644122 | Finca Los Nobles Malbec DOC 2022 |
+
+### Luigi Bosca De Sangre — 750 ml, cartón x 6 bot. · sin añada declarada
+| 1315306541 | Malbec Altamira |
+| 1315302541 | Cabernet Sauvignon |
+| 1315306542 | Malbec D.O.C |
+| 131510154 | Chardonnay |
+| 1315303541 | Cabernet Franc |
+| 1315306543 | Malbec Valle de Uco |
+| 131515854 | White Blend |
+| 131535754 | Corte |
+
+### Estuchería — a la categoría Estuches y regalos
+| 121530654111 | Paraíso · cartón x6, estuche x botella |
+| 12133064411 | Los Nobles Malbec DOC · cartón x4 |
+| 13193005412 | De Sangre Malbec/Cabernet Sauvignon · estuche 2 bot. |
+| 13133065411 | De Sangre Malbec DOC · cartón x6 |
+| 13133035411 | De Sangre Cabernet Franc · cartón x6 |
+| 13133575411 | De Sangre Corte · cartón x6 |
+| 131530654160 | De Sangre Malbec Valle de Uco · cartón plegable x6 |
+| 131530644161 | De Sangre Malbec Valle de Uco · cartón rígido x4 |
+| 131930034130 | De Sangre Altamira + Valle de Uco + DOC · cartón x3 |
+
+### Formato grande
+| 1313306452 | De Sangre Malbec DOC · **1,5 L** · cartón x4 |
+
+Para preguntar:
+- Los nueve de estuchería son los mismos vinos de la línea De Sangre en caja de
+  regalo. ¿Van como pieza aparte o alcanza con marcar la opción en el vino?
+- Modalidad de los 26.
+- La línea De Sangre no declara añada en la lista, lo que es buena señal: si
+  tampoco la lleva impresa en la etiqueta, no puede haber desajuste.
+
 ## Estado de las fotos (19/8)
 
 Buscadas en Hedonism, BoozeBud, The Bottle Club, Craftshack y Slurp, midiendo
