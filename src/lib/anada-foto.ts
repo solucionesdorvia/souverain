@@ -97,14 +97,19 @@ function anadaDeLaFoto(imageUrl: string): number | null {
 }
 
 /**
- * true cuando la pieza declara una añada en su nombre y la foto muestra otra.
- * Se usa para aclararlo al lado de la foto, únicamente en las que hace falta.
+ * true cuando la foto puede no corresponder a la añada que se entrega.
+ *
+ * Cubre dos casos, no uno. El evidente es que la pieza declare un año y la
+ * etiqueta muestre otro. El segundo aparece al sacar el año del título de los
+ * vinos de cosecha corriente: ahí ya no hay contradicción visible, pero la foto
+ * sigue siendo de una añada concreta y el cliente recibe la que esté en stock.
+ * Mientras la etiqueta lleve un año impreso, corresponde aclararlo.
  */
 export function fotoDeOtraAnada(name: string, imageUrl: string): boolean {
-  const enNombre = anadaDelNombre(name);
-  if (enNombre === null) return false;
   const enFoto = anadaDeLaFoto(imageUrl);
-  return enFoto !== null && enFoto !== enNombre;
+  if (enFoto === null) return false;          // la etiqueta no muestra año
+  const enNombre = anadaDelNombre(name);
+  return enNombre === null || enFoto !== enNombre;
 }
 
 /**
