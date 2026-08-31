@@ -1,10 +1,12 @@
 // Módulo de modo de checkout — intercambiable por variable de entorno.
 // CHECKOUT_MODE = "stripe" | "whatsapp"
+// Por defecto WhatsApp: mientras la clave de Stripe sea de prueba, el flujo
+// guardaba el pedido en la base y después le mostraba un error al cliente.
 
 export type CheckoutMode = "stripe" | "whatsapp";
 
 export function getCheckoutMode(): CheckoutMode {
-  const raw = (process.env.CHECKOUT_MODE ?? "stripe").toLowerCase();
+  const raw = (process.env.CHECKOUT_MODE ?? "whatsapp").toLowerCase();
   return raw === "whatsapp" ? "whatsapp" : "stripe";
 }
 

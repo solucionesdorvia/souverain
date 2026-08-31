@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { SITE } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { precioPublico } from "@/lib/utils";
 
@@ -274,7 +275,7 @@ export default async function EdicionesLimitadasPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/contacto" className="btn-ghost">Dejar mi contacto</Link>
                 <a
-                  href="https://wa.me/5491157581269"
+                  href={`https://wa.me/${SITE.phoneIntl}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-link"

@@ -42,6 +42,22 @@ export function Footer() {
         </div>
       </div>
       <div className="hairline-t">
+        <div className="container-souv py-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          {/* La Resolución 424/2020 pide que el botón de arrepentimiento esté a
+              la vista y no escondido entre los enlaces del pie. */}
+          <Link
+            href="/arrepentimiento"
+            className="hairline px-5 py-3 text-[11px] uppercase tracking-[0.25em] text-ink hover:border-gold hover:text-gold transition-colors duration-500"
+          >
+            Botón de arrepentimiento
+          </Link>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.25em] text-mute">
+            <Link href="/terminos" className="hover:text-gold transition-colors">Términos y condiciones</Link>
+            <Link href="/privacidad" className="hover:text-gold transition-colors">Privacidad</Link>
+          </div>
+        </div>
+      </div>
+      <div className="hairline-t">
         <div className="container-souv py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-[11px] uppercase tracking-[0.25em] text-mute">
           <span>© {new Date().getFullYear()} {SITE.name}</span>
           <span>Venta prohibida a menores de 18 años · Beber con moderación</span>

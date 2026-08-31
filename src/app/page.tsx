@@ -7,6 +7,7 @@ import { HeroCinematic } from "@/components/HeroCinematic";
 import { ParallaxVideo } from "@/components/ParallaxVideo";
 import { GalleryPiece } from "@/components/GalleryPiece";
 import { prisma } from "@/lib/prisma";
+import { SITE } from "@/lib/site";
 import { separarFotosRepetidas } from "@/lib/orden-catalogo";
 
 // Lee el catálogo en cada request, igual que /tienda.
@@ -286,7 +287,7 @@ export default async function HomePage() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <a
-                    href="https://wa.me/5491100000000"
+                    href={`https://wa.me/${SITE.phoneIntl}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary justify-center"
