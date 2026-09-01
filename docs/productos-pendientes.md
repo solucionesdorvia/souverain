@@ -493,6 +493,64 @@ Para preguntar:
 - La línea De Sangre no declara añada en la lista, lo que es buena señal: si
   tampoco la lleva impresa en la etiqueta, no puede haber desajuste.
 
+## Tanda 9 — 4 productos nuevos · Alma Mater y Ribera del Cuarzo (1/9)
+
+Gonzalo: *"Valen estos 4 nuevos productos de AlmaMater y Ribera del Cuarzo.
+Son nuevos nuevos"*. Ninguno estaba en las tandas anteriores.
+
+| Producto | Casa | Categoría | Modalidad | Foto |
+|---|---|---|---|---|
+| Naviero Malbec | Ribera del Cuarzo | Vinos | web | **en el Drive** |
+| Naviero Rosé | Ribera del Cuarzo | Vinos | web | **en el Drive** |
+| Alma Mater Grenache | Alma Mater (Matervini) | Vinos | web | falta |
+| 100 Años de Perdón Malbec | Cuchillo de Palo | Vinos | **Consultar** | falta |
+
+Las tres casas ya están en el catálogo, así que las piezas entran en la marca
+existente: Alma Mater tiene 8 vinos cargados, Ribera del Cuarzo 6 y Cuchillo de
+Palo 7. El Grenache es varietal aparte del **Alma Mater GSM** que ya está.
+
+**"100 Años de Perdón" va como Consultar** porque todavía no ingresó ("ingresa
+en los próximos días"). Es distinto de las cuatro piezas de la tanda 7 marcadas
+PRÓXIMAMENTE, que se dejaron sin cargar: acá la llegada es inminente y la
+modalidad Consultar existe justo para eso. Si Souverain prefiere no exhibirla
+hasta que entre, se saca en un renglón.
+
+### Las fotos de Naviero ya estaban en el Drive
+El relevamiento del 27/8 (`fotos-drive.md`) dejó anotado: *"la carpeta trae
+además una colección Naviero (Malbec y Rosé) que no figura en ninguna lista de
+Souverain"*. Eran estas. Hay cuatro archivos y dos son **sin añada**, que es el
+criterio que veníamos aplicando:
+
+- `NAVIERO_MALBEC_RIBERA_DEL_CUARZO_SIN_AÑADA` ← la que conviene
+- `NAVIERO_MALBEC_2024`
+- `NAVIERO_ROSE_RIBERA_DEL_CUARZO_SIN_AÑADA` ← la que conviene
+- `NAVIERO_ROSE_RIBERA_DEL_CUARZO`
+
+Las imágenes descargadas se perdieron del disco temporal y el link de la carpeta
+quedó en el hilo viejo de WhatsApp. **Hace falta que Gonzalo reenvíe el link del
+Drive del proveedor grande** (Ribera del Cuarzo, Cuchillo de Palo, Matervini,
+Alma Mater, Viñas Feroces, Viña Cobos, Cantieri) y las proceso.
+
+### Las otras dos no existen en ningún lado
+Buscadas en el Drive, en el sitio de cada bodega, en el kit de prensa Matermedia
+de Matervini y en tiendas online (MercadoLibre, Rebellion, Vinofino, Bien de
+Vinos, Espaciovino, Vinoteca BUAR, Santino, Bricco Wines, Vivino):
+
+- **Alma Mater Grenache** — el sitio de Matervini ni siquiera publica la línea
+  Alma Mater, y no ofrece ningún Grenache. En el Drive están los otros ocho
+  Alma Mater pero no éste.
+- **100 Años de Perdón Malbec** — sin rastro. Lógico: todavía no salió.
+
+Son productos recién lanzados, así que la foto tiene que venir de la bodega.
+
+### Luigi Bosca
+Las dos capturas de la lista de precios que mandó Gonzalo son las mismas de la
+**tanda 8**. Verifiqué los 26 códigos uno por uno contra las capturas y coinciden
+todos, incluidos los nueve de estuchería y el magnum de 1,5 L. No hay nada nuevo
+ahí. Siguen abiertas las dos preguntas de la tanda 8: si los estuches van como
+pieza aparte y cuál es la modalidad de los 26.
+
+
 ## Estado de las fotos (19/8)
 
 Buscadas en Hedonism, BoozeBud, The Bottle Club, Craftshack y Slurp, midiendo

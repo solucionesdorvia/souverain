@@ -40,6 +40,11 @@ Ciervos Malbec.
 Ojo: la carpeta trae además una **colección Naviero** (Malbec y Rosé) que no
 figura en ninguna lista de Souverain.
 
+> **Resuelto el 1/9.** Gonzalo confirmó que Naviero Malbec y Naviero Rosé son
+> dos de los cuatro productos nuevos (tanda 9). Las fotos ya estaban: hay cuatro
+> archivos y dos son **sin añada**, que son las que hay que usar. Falta que
+> reenvíe el link de la carpeta porque las descargas se perdieron del temporal.
+
 ### Viña Cobos — 21 de 30
 **Sin foto (9), casi todos magnums:** Cobos Magnum Malbec · Volturno Cabernet
 Sauvignon 2019 · Volturno Magnum Cabernet Sauvignon · Zingaretti Magnum Malbec ·
