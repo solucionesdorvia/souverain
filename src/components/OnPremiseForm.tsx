@@ -65,7 +65,7 @@ export function OnPremiseForm() {
           <select required value={rubro} onChange={e => setRubro(e.target.value)} className="input-souv bg-transparent">
             <option value="">Seleccionar</option>
             <option>Restaurante gastronómico</option>
-            <option>Bar o cocteleríA</option>
+            <option>Bar o coctelería</option>
             <option>Hotel boutique o de lujo</option>
             <option>Club privado</option>
             <option>Eventos y catering</option>

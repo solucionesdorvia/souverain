@@ -18,6 +18,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <Link href="/admin" className="text-ink/80 hover:text-gold">Resumen</Link>
             <Link href="/admin/productos" className="text-ink/80 hover:text-gold">Productos</Link>
             <Link href="/admin/pedidos" className="text-ink/80 hover:text-gold">Pedidos</Link>
+            <Link href="/admin/leads" className="text-ink/80 hover:text-gold">On Premise</Link>
             <form action="/api/admin/logout" method="post">
               <button type="submit" className="text-mute hover:text-gold uppercase tracking-[0.25em]">
                 Salir
