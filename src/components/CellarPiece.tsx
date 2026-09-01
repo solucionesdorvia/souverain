@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { precioPublico } from "@/lib/utils";
+import { AvisoAnada } from "@/components/AvisoAnada";
 
 export type CellarPieceData = {
   id: string;
@@ -67,6 +68,7 @@ export function CellarPiece({ piece, index = 0 }: { piece: CellarPieceData; inde
         <div className="pt-3 px-0.5">
           <div className="text-[9px] tracking-[0.3em] text-mute mb-1 uppercase">{piece.brand}</div>
           <h3 className="font-display text-base md:text-lg text-ink leading-tight">{piece.name}</h3>
+          <AvisoAnada name={piece.name} imageUrl={piece.imageUrl} className="mt-1" />
         </div>
       </Link>
     </motion.article>

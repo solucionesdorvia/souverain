@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/utils";
+import { AvisoAnada } from "@/components/AvisoAnada";
 
 export default function CarritoPage() {
   const { items, total, setQuantity, remove } = useCart();
@@ -44,6 +45,7 @@ export default function CarritoPage() {
                       <X size={16} />
                     </button>
                   </div>
+                  <AvisoAnada name={it.name} imageUrl={it.imageUrl} className="mb-1" />
                   <div className="text-sm text-mute mb-auto">{formatPrice(it.unitPrice)} c/u</div>
                   <div className="flex items-center justify-between mt-4">
                     <div className="flex items-center hairline">

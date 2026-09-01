@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { precioPublico } from "@/lib/utils";
+import { AvisoAnada } from "@/components/AvisoAnada";
 
 export type ProductCardData = {
   id: string;
@@ -56,7 +57,9 @@ export function ProductCard({ product, index = 0 }: { product: ProductCardData; 
           <h3 className="font-display text-xl md:text-2xl leading-tight text-ink mb-1">
             {product.name}
           </h3>
-          <div className="text-xs text-mute mb-3 line-clamp-1">{product.origin}</div>
+          <div className="text-xs text-mute line-clamp-1">{product.origin}</div>
+          <AvisoAnada name={product.name} imageUrl={product.imageUrl} className="mt-0.5" />
+          <div className="mb-3" />
           {precioPublico(product.price) ? (
             <div className="text-sm text-ink/90 tracking-wide">{precioPublico(product.price)}</div>
           ) : (

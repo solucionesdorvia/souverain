@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { formatPrice } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { AvisoAnada } from "@/components/AvisoAnada";
 
 export type GalleryPieceData = {
   id: string;
@@ -77,7 +78,9 @@ export function GalleryPiece({
           <h3 className="font-display text-xl md:text-2xl leading-tight text-ink mb-1">
             {piece.name}
           </h3>
-          <div className="caption mb-3 line-clamp-1">{piece.origin}</div>
+          <div className="caption line-clamp-1">{piece.origin}</div>
+          <AvisoAnada name={piece.name} imageUrl={piece.imageUrl} className="mt-0.5" />
+          <div className="mb-3" />
           {/* price 0 = todavía no cargaron la lista. Mostrar "$ 0" se lee como un
               error, así que hasta que haya precio la pieza va como consulta. */}
           {piece.checkoutMode === "CONSULTAR" || piece.price === 0 ? (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { AvisoAnada } from "@/components/AvisoAnada";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { SITE } from "@/lib/site";
@@ -212,6 +213,7 @@ export default async function EdicionesLimitadasPage() {
                   <h2 className="font-display text-4xl md:text-5xl xl:text-6xl text-ink leading-[1.02] tracking-tight mb-3">
                     {product.name}
                   </h2>
+                  <AvisoAnada name={product.name} imageUrl={product.imageUrl} className="mb-3" />
                   <div className="eyebrow text-mute mb-8">{drop.edition}</div>
 
                   <p className="text-ink/60 leading-relaxed mb-10 max-w-md">{drop.story}</p>

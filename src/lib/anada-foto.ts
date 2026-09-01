@@ -122,7 +122,7 @@ const ANADA_DE_LA_FOTO: Record<string, number> = {
 };
 
 /** Devuelve la añada que se lee en la foto, o null si esa foto no muestra año. */
-function anadaDeLaFoto(imageUrl: string): number | null {
+export function anadaDeLaFoto(imageUrl: string): number | null {
   const m = imageUrl.match(/\/productos\/([a-z0-9-]+)\.jpg/);
   return (m && ANADA_DE_LA_FOTO[m[1]]) ?? null;
 }

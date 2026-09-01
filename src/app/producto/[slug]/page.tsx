@@ -8,7 +8,7 @@ import { GalleryPiece } from "@/components/GalleryPiece";
 import { Reveal } from "@/components/Reveal";
 import { precioPublico } from "@/lib/utils";
 import { buildWhatsappUrl } from "@/lib/checkout-mode";
-import { fotoDeOtraAnada } from "@/lib/anada-foto";
+import { AvisoAnada } from "@/components/AvisoAnada";
 
 export const dynamic = "force-dynamic";
 
@@ -84,13 +84,15 @@ export default async function ProductoPage({ params }: { params: { slug: string 
               </span>
             </div>
           )}
-          {/* De Cheval des Andes y de Terrazas no hay foto publicada por añada:
-              se usa la de otra cosecha y se aclara en lugar de disimularlo. */}
-          {fotoDeOtraAnada(product.name, product.imageUrl) && (
-            <p className="caption text-center mt-4 mx-auto max-w-[300px]">
-              Imagen ilustrativa · puede no corresponder a la añada
-            </p>
-          )}
+          {/* De Cheval des Andes y de Terrazas no hay foto publicada por añada.
+              El aviso vive en AvisoAnada para que lo compartan todas las
+              superficies: antes sólo salía acá y en Drops la botella mostraba
+              otro año sin decir nada. */}
+          <AvisoAnada
+            name={product.name}
+            imageUrl={product.imageUrl}
+            className="text-center mt-4 mx-auto max-w-[300px]"
+          />
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-7">

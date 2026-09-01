@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/utils";
+import { AvisoAnada } from "@/components/AvisoAnada";
 
 export function CartDrawer() {
   const { isOpen, closeCart, items, total, setQuantity, remove } = useCart();
@@ -58,6 +59,7 @@ export function CartDrawer() {
                         <Link href={`/producto/${it.slug}`} onClick={closeCart} className="font-display text-lg leading-tight text-ink hover:text-gold transition-colors block mb-2">
                           {it.name}
                         </Link>
+                        <AvisoAnada name={it.name} imageUrl={it.imageUrl} className="mb-1" />
                         <div className="text-sm text-mute mb-4">{formatPrice(it.unitPrice)}</div>
                         <div className="flex items-center gap-3">
                           <div className="flex items-center hairline">
