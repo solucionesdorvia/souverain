@@ -129,5 +129,100 @@ export const Filete: React.FC<{ progreso: number; ancho?: number }> = ({ progres
   </div>
 );
 
-/** Marca de agua tipográfica para el fondo de los planos de cierre. */
-export const useFrameSeguro = () => useCurrentFrame();
+/**
+ * El barrido de luz.
+ *
+ * Es el único momento autorizado del reel y el que hace el trabajo: una botella
+ * en una sala oscura no aparece, la revela una luz que pasa por encima. El
+ * degradado va enmascarado con el alfa del propio PNG, así que el brillo cae
+ * sobre el vidrio y la etiqueta y no sobre el fondo; recortarlo con una forma
+ * geométrica sería la versión barata del mismo efecto.
+ *
+ * `avance` va de 0 a 1 y mueve la banda de un borde al otro.
+ */
+export const Barrido: React.FC<{ clave: string; avance: number; alto: number; fuerza?: number }> = ({
+  clave,
+  avance,
+  alto,
+  fuerza = 1,
+}) => {
+  /* El recorrido arranca y termina apenas afuera del cuadro. Con un rango más
+     ancho la banda pasaba casi todo el plano fuera de la botella y el efecto
+     se perdía: se medía en el pixel pero no se veía. */
+  const x = interpolate(avance, [0, 1], [-55, 135]);
+  /* Máscara aparte y no el alfa del propio PNG: ese alfa incluye el halo de
+     estudio alrededor de la botella y el barrido se derramaba sobre el fondo.
+     Las de mascaras/ tienen la silueta recortada dura, con un pelo de
+     desenfoque en el borde. */
+  const mascara = `url(${staticFile(`mascaras/${clave}.png`)})`;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        pointerEvents: "none",
+        WebkitMaskImage: mascara,
+        maskImage: mascara,
+        WebkitMaskSize: `auto ${alto}px`,
+        maskSize: `auto ${alto}px`,
+        WebkitMaskPosition: "center",
+        maskPosition: "center",
+        WebkitMaskRepeat: "no-repeat",
+        maskRepeat: "no-repeat",
+        /* Banda angosta y con núcleo caliente: es un reflejo especular sobre
+           vidrio, no un lavado de luz. El oro del centro es el mismo acento de
+           la marca, así que el brillo pertenece al mundo y no parece un filtro. */
+        background: `linear-gradient(104deg,
+          transparent ${x}%,
+          rgba(255,252,244,${0.16 * fuerza}) ${x + 12}%,
+          rgba(255,252,244,${0.78 * fuerza}) ${x + 20}%,
+          rgba(232,205,150,${0.95 * fuerza}) ${x + 24}%,
+          rgba(201,162,75,${0.34 * fuerza}) ${x + 30}%,
+          transparent ${x + 44}%)`,
+        mixBlendMode: "screen",
+      }}
+    />
+  );
+};
+
+/**
+ * Revelado por cortina.
+ *
+ * El texto sube desde detrás de su propia línea de base en lugar de aparecer
+ * con un fundido. Cuesta lo mismo y se lee como tipografía compuesta, no como
+ * una capa a la que le subieron la opacidad.
+ */
+export const Cortina: React.FC<{
+  p: number;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}> = ({ p, children, style }) => (
+  <div style={{ overflow: "hidden", ...style }}>
+    <div
+      style={{
+        transform: `translateY(${(1 - p) * 112}%)`,
+        opacity: p < 0.02 ? 0 : 1,
+      }}
+    >
+      {children}
+    </div>
+  </div>
+);
+
+/**
+ * Viñeta.
+ *
+ * Cierra los bordes para que el ojo caiga en el centro del cuadro. En vertical
+ * importa más que en apaisado: el celular se mira con luz de ambiente encima y
+ * sin esto los bordes del video se confunden con el fondo de la app.
+ */
+export const Vineta: React.FC = () => (
+  <AbsoluteFill
+    style={{
+      background:
+        "radial-gradient(78% 52% at 50% 46%, transparent 42%, rgba(0,0,0,.55) 100%)",
+      pointerEvents: "none",
+    }}
+  />
+);
+

@@ -5,10 +5,12 @@ del sitio sin reinterpretarlo: negro #0A0A0A, oro #C9A24B, Cormorant Garamond,
 Cinzel para las casas, filetes de 1px y el escudo real al pie — nunca la palabra
 "Souverain" escrita.
 
-Los textos no afirman nada que no esté cargado. El único número que aparece es
-**323**, que son las piezas efectivamente publicadas en la tienda, y **43**, las
-de Champagne. Si el catálogo crece hay que actualizarlos antes de volver a
-publicar.
+Los textos no afirman nada que no esté cargado, y **ninguno dice cuántas piezas
+tiene el catálogo**. Ese número se vence en cuanto entra una tanda nueva, así
+que las diez publicaciones se apoyan en lo que no caduca: qué clase de casa es,
+de dónde vienen las botellas y qué resuelven. Los únicos números que aparecen
+cuentan lo que está en la propia publicación — "seis casas", "cuatro pasos" —
+y ésos se leen igual de bien dentro de un año.
 
 ---
 
@@ -18,10 +20,18 @@ publicar.
 
 | # | Archivo | Dura | De qué va |
 |---|---|---|---|
-| 01 | `reel-coleccion.mp4` | 13 s | La cifra 323 sube sola, después la grilla de doce botellas, remate: "no surtimos una góndola, armamos una cava" |
-| 02 | `reel-luxury-black.mp4` | 18 s | Cinco piezas Luxury Black de a una, con aire. Cierra en "sin precio" |
-| 03 | `reel-champagne.mp4` | 18 s | Las cinco casas de Champagne. Cierra en "de Reims a Épernay" |
-| 04 | `reel-on-premise.mp4` | 16 s | Sin una sola botella: le habla a un dueño de salón, cuatro beats de servicio |
+| 01 | `reel-coleccion.mp4` | 16 s | Una botella revelada por la luz, "una botella entra o no entra", la grilla de doce, y el remate "no surtimos una góndola, armamos una cava" |
+| 02 | `reel-luxury-black.mp4` | 27 s | Cinco piezas Luxury Black de a una, con aire. Cierra en "sin precio" |
+| 03 | `reel-champagne.mp4` | 27 s | Las cinco casas, de Reims a Épernay. Cierra en "seis casas" |
+| 04 | `reel-on-premise.mp4` | 27 s | Sin una sola botella: le habla a un dueño de salón, cuatro beats de servicio |
+
+**Ninguno menciona cuántas piezas hay.** El número se vence en cuanto entra una
+tanda nueva, así que los reels se apoyan en lo que no caduca: qué clase de casa
+es, de dónde vienen las botellas y qué resuelven.
+
+**Duran entre 16 y 27 segundos**, a propósito: el ritmo anterior corría a 2,2
+segundos por plano y el texto competía con la botella por el mismo instante. Se
+leía apurado.
 
 **Van sin música.** Se sube el mp4 y se le agrega el audio desde Instagram, con
 un tema de su biblioteca. Es a propósito: un audio embebido no entra al
@@ -32,9 +42,9 @@ jazz de contrabajo. Nada con letra: los reels ya tienen texto en pantalla.
 ### Textos para subir
 
 **01 · La colección**
-> Trescientas veintitrés piezas en exhibición.
+> Una botella entra o no entra.
 > Champagne de Reims y Épernay, maltas de Orkney y Speyside, cognac, gin, ron
-> y vinos argentinos de parcela.
+> y vinos argentinos de parcela. Cada una se elige de a una.
 > No surtimos una góndola. Armamos una cava.
 > Consultas por mensaje directo. Entregas en CABA y GBA.
 
@@ -46,9 +56,9 @@ jazz de contrabajo. Nada con letra: los reels ya tienen texto en pantalla.
 > Si busca una en particular, escríbanos.
 
 **03 · Champagne**
-> Cuarenta y tres piezas de Champagne.
-> Dom Pérignon, Krug, Veuve Clicquot, Moët & Chandon, Perrier-Jouët, G.H. Mumm.
-> Añadas, magnums y ediciones que no llegan al mostrador.
+> De Reims a Épernay.
+> Dom Pérignon, Krug, Veuve Clicquot, Moët & Chandon, G.H. Mumm.
+> Añadas y magnums que no llegan al mostrador.
 > Consultas por mensaje directo.
 
 **04 · On Premise**
@@ -78,7 +88,7 @@ Se suben en orden: la 01 es la portada y la última es el cierre con el contacto
 ### Textos para subir
 
 **05 · Champagne**
-> Cuarenta y tres piezas de Champagne en la colección.
+> Seis casas de Champagne en la colección.
 > Deslizá para ver las seis casas: Dom Pérignon y Moët desde Épernay; Krug,
 > Veuve Clicquot y Mumm desde Reims; Perrier-Jouët con la anémona de Belle
 > Époque.

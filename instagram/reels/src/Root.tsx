@@ -7,7 +7,7 @@ import { OnPremise } from "./reels/OnPremise";
 
 /* La duración de una serie sale de sus piezas, no de un número a ojo: portada +
    piezas + cierre. Si mañana se agrega una botella, el reel se alarga solo. */
-const duracionSerie = (piezas: number, porPieza = 66, portada = 96, cierre = 116) =>
+const duracionSerie = (piezas: number, porPieza = 108, portada = 120, cierre = 156) =>
   portada + piezas * porPieza + cierre;
 
 const LUXURY: Pieza[] = [
@@ -31,7 +31,7 @@ export const Root: React.FC = () => (
     <Composition
       id="reel-coleccion"
       component={Coleccion}
-      durationInFrames={410}
+      durationInFrames={478}
       fps={FPS}
       width={ANCHO}
       height={ALTO}
@@ -61,17 +61,17 @@ export const Root: React.FC = () => (
       height={ALTO}
       defaultProps={{
         etiqueta: "Champagne",
-        titulo: "Cuarenta\ny tres",
-        bajada: "Piezas de Champagne",
+        titulo: "De Reims\na Épernay",
+        bajada: "Las casas de Champagne",
         piezas: CHAMPAGNE,
-        cierreTitulo: "De Reims a Épernay",
-        cierreTexto: "Añadas, magnums y ediciones que no van al mostrador.",
+        cierreTitulo: "Seis casas",
+        cierreTexto: "Añadas y magnums que no llegan al mostrador.",
       }}
     />
     <Composition
       id="reel-on-premise"
       component={OnPremise}
-      durationInFrames={470}
+      durationInFrames={798}
       fps={FPS}
       width={ANCHO}
       height={ALTO}
