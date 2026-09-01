@@ -18,3 +18,9 @@ instagram/normal/
 instagram/png/
 instagram/contacto.jpg
 .impeccable/questions/
+
+# Remotion: dependencias y copias de assets que ya viven en instagram/normal
+instagram/reels/node_modules/
+instagram/reels/public/botellas/
+instagram/reels/public/logo-crest.png
+instagram/reels/salida/
